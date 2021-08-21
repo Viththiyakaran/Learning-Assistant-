@@ -1,3 +1,11 @@
+<?php  
+ session_start();  
+ if(isset($_SESSION["username"]))  
+ {  
+      header("location:view/dashboard.php");  
+ }  
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
