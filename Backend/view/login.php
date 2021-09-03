@@ -49,6 +49,18 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <select name="type" class="form-control" aria-label="Default select example">
+            <option selected>Select the type</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-people-arrows"></span>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-6">
             <button type="submit" class="btn btn-danger btn-block">Sign In</button>
@@ -61,7 +73,7 @@
         </div>
       </form>
       <p class="mb-0 mt-4">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="view/registration.php" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->

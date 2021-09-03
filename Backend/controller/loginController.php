@@ -5,9 +5,10 @@
   {
         $myusername = mysqli_real_escape_string($con,$_POST['username']);
         $mypassword = mysqli_real_escape_string($con,$_POST['password']); 
+        $mytype= mysqli_real_escape_string($con,$_POST['type']); 
         // $usertype = mysqli_real_escape_string($con,$_POST['usertype']); 
         
-        $sql = "SELECT adminID  FROM admintable WHERE username= '$myusername' and password2 = '$mypassword'";
+        $sql = "SELECT loginID   FROM tbllogin WHERE username= '$myusername' and password2 = '$mypassword' and type= '$mytype'";
         $result = mysqli_query($con,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         //$active = $row['active'];
