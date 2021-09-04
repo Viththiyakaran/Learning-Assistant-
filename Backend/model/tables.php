@@ -12,7 +12,8 @@ $tbllogin = "Create table IF NOT EXISTS adminTable (
     fullname varchar(150) not null,
     type varchar(10) not null,
     createdDate date,
-    updatedDate date );";
+    updatedDate date ),
+    isActive bool;";
 
 if(mysqli_query($con,$tbllogin)===TRUE)
 {

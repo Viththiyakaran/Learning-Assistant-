@@ -8,7 +8,7 @@
         $mytype= mysqli_real_escape_string($con,$_POST['type']); 
         // $usertype = mysqli_real_escape_string($con,$_POST['usertype']); 
         
-        $sql = "SELECT loginID   FROM tbllogin WHERE username= '$myusername' and password2 = '$mypassword' and type= '$mytype'";
+        $sql = "SELECT loginID   FROM tbllogin WHERE username= '$myusername' and password2 = '$mypassword' and type= '$mytype' and isActive=1";
         $result = mysqli_query($con,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         //$active = $row['active'];
@@ -22,6 +22,7 @@
         echo("<script>console.log('Date');</script>");
         session_start();
         $_SESSION['username'] = $myusername;
+        $_SESSION['type'] = $mytype;
         header("location:../view/dashboard.php");  
         }else {
 
