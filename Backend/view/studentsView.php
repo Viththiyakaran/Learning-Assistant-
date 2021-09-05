@@ -6,6 +6,39 @@
  }  
  
  include('../model/db.php');
+
+
+ if($_GET['loginID'])
+ {
+   $sql = "Select * from tbllogin where loginID =".$_GET['loginID']."";
+   $result = mysqli_query($con, $sql);
+                 if (mysqli_num_rows($result) > 0) {
+                   // output data of each row
+                   while($row = mysqli_fetch_assoc($result)) {
+                     $loginID = $row['loginID'];
+                     $fullname= $row['fullname'];
+                     $email = $row['email'];
+                     $username = $row['username'];
+                     $password= $row['password'];
+                     $password2 = $row['password2'];
+                     //$joindate = $row['createdDate'];
+                     $dob = $row['dob'];
+                     $contactnumber = $row['contactnumber'];
+                     $address = $row['address'];
+                     $hobbies = $row['hobbies'];
+                     $isActive = $row['isActive'];
+
+                     if($isActive == true)
+                     {
+                        $isActive = "Active";
+                     }
+                     else{
+                      $isActive = "Deactive";
+                     }
+                    }
+                  }
+ }
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,60 +305,92 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Student ID </th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Join Date</th>
-                    <th>Status</th>
-                    <th>View</th>
-                  </tr>
-                  </thead>
-                  <tbody>
+              <form action="../controller/studentController.php" method="post">
+               <input type="hidden" name="loginID" class="form-control" value="<?php echo $loginID; ?> ">
+                <div class="row">   
+                    <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Full Name</label>
+                              <input type="text" name="fullname" class="form-control" value="<?php echo $fullname; ?> ">
+                            </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email</label>
+                              <input type="email" name="email" class="form-control" value="<?php echo $email; ?> ">
+                            </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Active</label>
+                              <select name="active" class="form-select form-control" aria-label="Default select example">
+                                <option value="1">Active</option>
+                                <option value="0">Deactive</option>
+                                <select>
+                            </div>
+                      </div>
+                  </div>
                   
-                 <?php 
+                  <div class="row">
+                  <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Username</label>
+                              <input type="text" name="username" class="form-control" value="<?php echo $username; ?> ">
+                            </div>
+                      </div>
+                    <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Password</label>
+                              <input type="text" name="password" class="form-control" value="<?php echo $password; ?> ">
+                            </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Repeat Password</label>
+                              <input type="text" name="password2" class="form-control" value="<?php echo $password2; ?> ">
+                            </div>
+                      </div>
+                  </div>
 
-                  $sql = "select * from tbllogin where type = 'user'";
-                  $result = mysqli_query($con, $sql);
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = mysqli_fetch_assoc($result)) {
+                  <div class="row">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Date of birth</label>
+                              <!-- <input type="Date"  name="dob" class="form-control" value="<?php echo $dob; ?> "> -->
+                              <input type="date" class="form-control" value="<?php echo strftime('%Y-%m-%d',strtotime( $dob)); ?>" name="dob" />
 
-                      if($row['isActive'] == true)
-                      {
-                        $isActive = "<button type='button' class='btn btn-success'>Active</button>";
-                      }
-                      else{
-                        $isActive = "<button type='button' class='btn btn-danger'>InActive</button>";
-                      }
-                      echo " <tr>
-                      <td>".$row['loginID']."</td>
-                      <td>".$row['fullname']."</td>
-                      <td>".$row['email']."</td>
-                      <td>".$row['username']."</td>
-                      <td>".$row['createdDate']."</td>
-                      <td>".$isActive."</td>
-                      <td><a class='btn btn-primary' href=studentsView.php?loginID=".$row['loginID']."> View </a></td>
-                    </tr>";
-                    }
-                  } else {
-                    echo "0 results";
-                  }
-                  ?>     
-                  </tbody>
-                  <tfoot>
-                  <th>Student ID </th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Join Date</th>
-                    <th>Status</th>
-                    <th>View</th>
-                  </tfoot>
-                </table>
+                            </div>
+                      </div>
+                      <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Contact number</label>
+                              <input type="phone"   name="contactnumber" class="form-control" value="<?php echo $contactnumber ; ?> ">
+                            </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                          <div class="form-group">
+                              <label for="exampleFormControlTextarea1">Address</label>
+                             <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"><?php echo $address; ?></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                            <div class="form-group">
+                                  <label for="exampleFormControlTextarea1">Hobbies</label>
+                                <textarea class="form-control"  name="hobbies" id="exampleFormControlTextarea1" rows="3"><?php echo $hobbies; ?> </textarea>
+                              </div>
+                      </div>
+                  </div>
+                 
+                    
+                  <input type="submit" name="update" class="btn btn-primary" value="Update">
+                 
+                  <a  class='btn btn-danger' href=../controller/studentController.php?loginID=<?php echo $loginID; ?>>Delete</a>
+
+            </form>
+
               </div>
               <!-- /.card-body -->
             </div>

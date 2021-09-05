@@ -10,8 +10,8 @@
       $password = $_POST['password'];
       $repassword = $_POST['repassword'];
 
-      $sql = "INSERT INTO `tbllogin`( `username`, `password`, `password2`, `email`, `fullname`, `type`, `createdDate`, `updatedDate`) 
-      VALUES ('".$username."','".$password."','".$repassword."','".$email."','".$fullname."','User','now()','now()')" or die("Here plm");
+      $sql = "INSERT INTO `tbllogin`( `username`, `password`, `password2`, `email`, `fullname`, `type`, `createdDate`, `updatedDate`,`isActive`) 
+      VALUES ('".$username."','".$password."','".$repassword."','".$email."','".$fullname."','User',now(),now(),1)" or die("Here plm");
 
       if(mysqli_query($con,$sql))
       {
