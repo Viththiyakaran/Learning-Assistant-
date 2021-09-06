@@ -6,7 +6,9 @@
  }  
  
  include('../model/db.php');
+ 
 
+ 
 
  ?>
 <!DOCTYPE html>
@@ -275,8 +277,22 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                  <?php 
 
+
+              
+
+
+
+
+
+
+
+
+
+
+
+                <form action="../controller/cateQueController.php"  method="post">
+                  <?php 
                   $sql = "select * from tblcategory";
                   $result = mysqli_query($con, $sql);
                   if (mysqli_num_rows($result) > 0) {
@@ -297,7 +313,46 @@
             <!-- /.card -->
 
               <div id="mcq"> </div>
+              <div id="ans"><input type="submit" name="findans"></div>
+                </form>
 
+              <?php
+              if(isset($_GET['id']))
+              {
+                $sql = "select * from tblmcqtest tmt inner join tblmcqtestans tct on tmt.qid = tct.aid  where tmt.categoryid =".$_GET['id']."";
+
+                $result = mysqli_query($con,$sql);
+
+                if (mysqli_num_rows($result) > 0) {
+        
+            
+              while($row = mysqli_fetch_assoc($result)) {
+             
+                  echo '
+                      <div class="card">
+                          <!-- /.card-header -->
+                          <div class="card-body">
+                          <i class="fas fa-certificate"></i>
+                          '.$row["question"].'
+                          <br>
+                      
+                          <div class="alert alert-secondary  mt-3">
+                            <p><i class="icon fas fa-info"></i> Answer is '.$row["answer"].' </p>
+                          </div>
+                      
+                      </div>
+                      <!-- /.card-body -->
+                  </div>
+                  <!-- /.card --> ';
+            
+             
+                  }
+                } else {
+                  echo "0 results";
+                }
+                        }
+
+              ?>
           </div>
           <!-- /.col -->
         </div>
@@ -347,6 +402,8 @@
 <script src="../public/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
+    $("#ans").hide();
+
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -374,9 +431,29 @@
                 method:"POST",  
                 data:{catID:catID},  
                 success:function(data){  
-                     $('#mcq').html(data);   
+                     $('#mcq').html(data);
+                     $("#ans").show();   
                 }  
            }); 
+      }); 
+    }); 
+</script>  
+
+
+<script>
+    $("document").ready( function () {
+      $('#ans').change(function(){  
+           var catID = $(this).val(); 
+          alert(catID); 
+          //  $.ajax({  
+          //       url:"../controller/cateQueController.php",  
+          //       method:"POST",  
+          //       data:{catID:catID},  
+          //       success:function(data){  
+          //            $('#mcq').html(data);
+          //            $("#ans").show();   
+          //       }  
+          //  }); 
       }); 
     }); 
 </script>  

@@ -1,6 +1,21 @@
 <?php 
 
 include("../model/db.php");
+
+
+
+
+if(isset($_POST['findans']))
+{ 
+
+   $cat = $_POST['cat'];
+   header("Location: ../view/mcqAdd.php?id=" . $cat);
+}
+
+
+
+
+//========================================================================================================//
  
 if(isset($_POST['addcat']))
 {
@@ -91,7 +106,6 @@ if(isset($_POST['catID']))
         
             $count = 0;
         while($row = mysqli_fetch_assoc($result)) {
-              
               $count++;
             echo '<form method="post">
                 <div class="card">
@@ -128,7 +142,7 @@ if(isset($_POST['catID']))
                    '.$row["op4"].' 
                   </label>
                 </div>
-              
+               
                 
                 </div>
                 <!-- /.card-body -->
@@ -136,14 +150,14 @@ if(isset($_POST['catID']))
             <!-- /.card -->
             </form>';
             
-            
+             
         }
       } else {
         echo "0 results";
       }
 
+      
 }
-
 
 
 
@@ -165,3 +179,22 @@ if(isset($_POST['catID']))
   }
 }, 1000);
 </script>
+
+
+<script>
+    $("document").ready( function () {
+      $('#check').click(function(){  
+           var answerID = $(this).val(); 
+         // alert(answerID); 
+           $.ajax({  
+                 url:"test.php",  
+                method:"POST",  
+                data:{answerID:answerID},  
+                success:function(data){  
+                     $('#ans').html(data);  
+                     
+                }  
+           }); 
+      }); 
+    }); 
+</script>  
