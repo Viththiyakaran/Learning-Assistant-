@@ -6,6 +6,10 @@
  }  
  
  include('../model/db.php');
+
+ include('../controller/cateQueController.php');
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Simple</title>
-
+ 
+  
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -106,7 +111,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="students.php" class="nav-link  active">
+             <a href="students.php" class="nav-link  ">
                <i class="nav-icon fas fa-th"></i>
                <p>
                 Students
@@ -114,7 +119,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-item">
+           <li class="nav-item menu-open">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
@@ -124,21 +129,21 @@
                </p>
              </a>
              <ul class="nav nav-treeview">
-               <li class="nav-item">
-                <a href="addSubjectCat.php" class="nav-link">
+                <li class="nav-item">
+                    <a href="addSubjectCat.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Categories</p>
-                </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    </a>
+                 </li>
+                <li class="nav-item">
+                 <a href="addQuestions.php" class="nav-link active">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Grade 11</p>
+                   <p>MCQ Questions</p>
                  </a>
                </li>
              </ul>
            </li>
-           <li class="nav-item">
+           <li class="nav-item ">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-chart-pie"></i>
                <p>
@@ -148,7 +153,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqAdd.php" class="nav-link">
+                 <a href="mcqAdd.php" class="nav-link  active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
@@ -252,12 +257,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Students</h1>
+            <h1 class="m-0">MCQ</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Students v1</li>
+              <li class="breadcrumb-item active">MCQ v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -272,43 +277,147 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add new question
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">  
+      <form action="../controller/cateQueController.php" method="post">
+              <input type="number" class="form-control" readonly name="qid" value="<?php echo $next;  ?>">
+             
+                <div class="row">   
+                    <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Question Text:</label>
+                              <input type="text" name="question" class="form-control">
+                            </div>
+                      </div>
+                  </div>
+                  
+                  <div class="row">
+                  <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Choice 1:</label>
+                              <input type="text" name="op1" class="form-control">
+                            </div>
+                      </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Choice 2:</label>
+                              <input type="text" name="op2" class="form-control" >
+                            </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Choice 3:</label>
+                              <input type="text" name="op3" class="form-control" >
+
+                            </div>
+                      </div>
+                      <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Choice 4:</label>
+                              <input type="text" name="op4" class="form-control" >
+                            </div>
+                      </div>
+                  </div>
+
+                  
+
+                  <div class="row">
+                    <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Correct Answer</label>
+                              <input type="text" name="answer" class="form-control" >
+
+                            </div>
+                      </div>
+                  </div>
+
+                  <div class="row">   
+                    <div class="col-md-12">
+                            <div class="form-group">
+                            <?php 
+                            $sql = "select * from tblcategory";
+                            $result = mysqli_query($con, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                            // output data of each row
+                            echo "<select name='cat' class='form-select form-control' aria-label='Default select example'> ";
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo " <option value=".$row['catid'].">".$row['categoryName']."</option>";
+                            }
+                            } else {
+                            echo "0 results";
+                            }
+                            ?>    
+                                </select>
+                            </div>
+                      </div>
+                  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <input type="submit" name="addQue" class="btn btn-success" value="Add New">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+
+
+            
+              <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Student ID </th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Join Date</th>
-                    <th>Status</th>
-                    <th>View</th>
+                  <th>Question ID</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Delete</th>
                   </tr>
                   </thead>
                   <tbody>
                   
                  <?php 
 
-                  $sql = "select * from tbllogin where type = 'user'";
+                  $sql = "select * from tblmcqtest";
                   $result = mysqli_query($con, $sql);
                   if (mysqli_num_rows($result) > 0) {
                     // output data of each row
                     while($row = mysqli_fetch_assoc($result)) {
 
-                      if($row['isActive'] == true)
-                      {
-                        $isActive = "<button type='button' class='btn btn-success'>Active</button>";
-                      }
-                      else{
-                        $isActive = "<button type='button' class='btn btn-danger'>InActive</button>";
-                      }
+                     
                       echo " <tr>
-                      <td>".$row['loginID']."</td>
-                      <td>".$row['fullname']."</td>
-                      <td>".$row['email']."</td>
-                      <td>".$row['username']."</td>
-                      <td>".$row['createdDate']."</td>
-                      <td>".$isActive."</td>
-                      <td><a class='btn btn-primary' href=studentsView.php?loginID=".$row['loginID']."> View </a></td>
+                      <td>".$row['qid']."</td>
+                      <td>".$row['question']."</td>
+                    
+                      <td>".$row['answer']."</td>
+                      <td><a class='btn btn-danger' href=../controller/cateQueController.php?qid=".$row['qid']."> Delete </a></td>
                     </tr>";
                     }
                   } else {
@@ -317,19 +426,20 @@
                   ?>     
                   </tbody>
                   <tfoot>
-                  <th>Student ID </th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Join Date</th>
-                    <th>Status</th>
-                    <th>View</th>
+                  
+                  <th>Question ID</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Delete</th>
                   </tfoot>
                 </table>
+
+
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+              
           </div>
           <!-- /.col -->
         </div>
@@ -355,7 +465,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="../public/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -382,7 +492,7 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

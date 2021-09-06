@@ -158,10 +158,10 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="pages/layout/top-nav.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Grade 10</p>
-                 </a>
+                  <a href="addSubjectCat.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categories</p>
+                  </a>
                </li>
                <li class="nav-item">
                  <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
@@ -181,7 +181,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="pages/charts/chartjs.html" class="nav-link">
+                 <a href="mcqAdd.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>

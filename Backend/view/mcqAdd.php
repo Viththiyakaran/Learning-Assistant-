@@ -5,35 +5,28 @@
       header("Location:../index.php");  
  }  
  
- ?>
+ include('../model/db.php');
 
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simple  </title>
-
+  <title>Simple</title>
+ 
+  
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../public/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../public/plugins/jqvmap/jqvmap.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../public/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../public/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../public/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -108,7 +101,7 @@
            if($_SESSION['type'] == "Admin") 
            {
              echo '<li class="nav-item">
-             <a href="dashboard.php" class="nav-link active">
+             <a href="dashboard.php" class="nav-link">
                <i class="nav-icon fas fa-tachometer-alt"></i>
                <p>
                  Dashboard
@@ -116,7 +109,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="students.php" class="nav-link">
+             <a href="students.php" class="nav-link  ">
                <i class="nav-icon fas fa-th"></i>
                <p>
                 Students
@@ -134,21 +127,21 @@
                </p>
              </a>
              <ul class="nav nav-treeview">
+              <li class="nav-item">
+                    <a href="addSubjectCat.php" class="nav-link  active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Categories</p>
+                    </a>
+              </li>
                <li class="nav-item">
-                 <a href="addSubjectCat.php" class="nav-link">
+                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Categories</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="addQuestions.php" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>MCQ Questions</p>
+                   <p>Grade 11</p>
                  </a>
                </li>
              </ul>
            </li>
-           <li class="nav-item">
+           <li class="nav-item menu-open">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-chart-pie"></i>
                <p>
@@ -158,7 +151,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqadd.php" class="nav-link">
+                 <a href="mcqAdd.php" class="nav-link  active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
@@ -226,34 +219,28 @@
            </li>';
            }
            else{
-            echo '
-            <li class="nav-item">
-            <a href="profile.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-               Profile
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="mcqGame.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-               MCQ Game
-              </p>
-            </a>
-          </li>
-         <li class="nav-header">EXAMPLES</li>
-          <li class="nav-item">
-            <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-               Logout
-              </p>
-            </a>
-          </li>';
-        }
+               echo '
+               <li class="nav-item">
+               <a href="profile.php" class="nav-link">
+                 <i class="nav-icon fas fa-edit"></i>
+                 <p>
+                  Profile
+                 </p>
+               </a>
+             </li>
+            <li class="nav-header">EXAMPLES</li>
+             <li class="nav-item">
+               <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+                 <i class="nav-icon fas fa-sign-out-alt"></i>
+                 <p>
+                  Logout
+                 </p>
+               </a>
+             </li>';
+           }
           ?>
+
+       
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -268,109 +255,55 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Select Category Quiz</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">MCQ v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
+          <div class="col-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                  <?php 
 
-                <p>New Orders</p>
+                  $sql = "select * from tblcategory";
+                  $result = mysqli_query($con, $sql);
+                  if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    echo "<select name='cat' id='cat' class='form-select form-control' aria-label='Default select example'>
+                            <option >Select the Category </option>";
+                    while($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value=".$row['catid'].">".$row['categoryName']."</option>";
+                    }
+                  } else {
+                    echo "0 results";
+                  }
+                  ?>     
+            </select>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.card-body -->
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <!-- /.card -->
 
-                <p>Bounce Rate</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
+              <div id="mcq"> </div>
 
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
+          <!-- /.col -->
         </div>
         <!-- /.row -->
-        <!-- Main row -->
-        <div class="row">
-          <!-- Left col -->
-          <section class="col-lg-7 connectedSortable">
-            
-            
-
-          
-
-            <!-- TO DO List -->
-           
-            <!-- /.card -->
-          </section>
-          <!-- /.Left col -->
-          <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          <section class="col-lg-5 connectedSortable">
-            
-            
-          </section>
-          <!-- right col -->
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -390,40 +323,65 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="../public/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../public/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
 <!-- Bootstrap 4 -->
 <script src="../public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="../public/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="../public/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="../public/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="../public/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="../public/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="../public/plugins/moment/moment.min.js"></script>
-<script src="../public/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="../public/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="../public/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="../public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="../public/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../public/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../public/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../public/plugins/jszip/jszip.min.js"></script>
+<script src="../public/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../public/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../public/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../public/dist/js/adminlte.js"></script>
+<script src="../public/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../public/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../public/dist/js/pages/dashboard.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+<script>
+    $("document").ready( function () {
+      $('#cat').change(function(){  
+           var catID = $(this).val(); 
+          //alert(catID); 
+           $.ajax({  
+                url:"../controller/cateQueController.php",  
+                method:"POST",  
+                data:{catID:catID},  
+                success:function(data){  
+                     $('#mcq').html(data);   
+                }  
+           }); 
+      }); 
+    }); 
+</script>  
+
+
+
 </body>
 </html>
