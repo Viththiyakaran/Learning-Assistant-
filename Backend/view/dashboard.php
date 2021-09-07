@@ -249,6 +249,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+          <a href="videoGame.php" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+             Video Tutorils
+            </p>
+          </a>
+        </li>
          <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">

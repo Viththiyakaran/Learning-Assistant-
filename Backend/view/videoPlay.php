@@ -278,55 +278,116 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <!-- <div class="row"> -->
           <div class="col-12">
            
-          
-         <?php 
+          <form id="userForm">
+        <div class="row">
+              <div class="col-md-6">
+                    
+                                <div class="card">
+                                      <div class="card-body">
+                                      <?php 
+                                          if(isset($_GET['playID']))
+                                          {
+                                            $sql = "SELECT * FROM `tblvideos` WHERE vid ='".$_GET['playID']."'  ";
+
+                                                  $result = mysqli_query($con,$sql);
+
+                                                  if (mysqli_num_rows($result) > 0) {
+                                                      
+                                                      while($row = mysqli_fetch_assoc($result)) {
+
+                                                        echo'
+                                                        <input type="hidden" name="vid" id="vidID" value='.$row['vid'].' class="form-control">
+                                                        <input type="hidden" name="commentby" value='. $_SESSION["username"] .' class="form-control">
+                                                          <div class="position-relative">
+                                                          <iframe width="495" height="315"
+                                                          src='.$row['videoPath'].' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                          allowfullscreen>
+                                                          </iframe> 
+                                                          </div>
+                                                       ';
+                                                          }
+                                                      } else {
+                                                          echo "0 results";
+                                                  }
+                                          }
+
+                                          ?>
 
 
-          if(isset($_GET['playID']))
-          {
-            $sql = "SELECT * FROM `tblvideos` WHERE vid ='".$_GET['playID']."'  ";
+                                    </div>
+                                </div>
 
-                  $result = mysqli_query($con,$sql);
+              </div>
 
-                  if (mysqli_num_rows($result) > 0) {
-                      
-                      while($row = mysqli_fetch_assoc($result)) {
+              <div class="col-md-6">
+                    
+                                <div class="card">
+                                      <div class="card-body">
+                                      <?php
+                                        $sql = "SELECT * FROM `tblvideos` limit 3";
 
-                        echo'
-                       
-                        <div class="position-relative">
-                        <iframe width="560" height="315"
-                        src='.$row['videoPath'].' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                         allowfullscreen>
-                        </iframe> 
-                        </div> ';
-                          }
-                      } else {
-                          echo "0 results";
-                  }
-          }
+                                        $result = mysqli_query($con,$sql);
+
+                                        if (mysqli_num_rows($result) > 0) {
+                                            
+                                            while($row = mysqli_fetch_assoc($result)) {
+
+                                              echo'
+                                              <div class="info-box">
+                                              <a href=videoPlay.php?playID='.$row['vid'].'>
+                                              <img src="../controller/uploads/'.$row["videoImage"].'"  width="85px" alt="Photo 1" class="img-fluid">
+                                                <div class="info-box-content">
+                                                  <span class="info-box-text">'.substr($row['videoName'], 0, 50).'..</span>
+                                                </div></a>
+                                                <!-- /.info-box-content -->
+                                              </div>
+                                              <!-- /.info-box -->';
+                                                }
+                                            } else {
+                                                echo "0 results";
+                                        }
+
+                                  ?>
 
 
-         
+                                    </div>
+                                </div>
 
-        ?>
-      
-       
-
-
+              </div>
+        </div>
 
 
+        <div class="row">
+              <div class="col-md-12">
+                    
+                                <div class="card">
+                                      <div class="card-body">
+                                      
+                                        <div class="form-floating">
+                                         <label for="floatingTextarea">Comments</label>
+                                          <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-3">Comment</button>
+                                      <form>
+                                    </div>
+                                </div>
 
+                               
+                                       <div id="comments"> </div>
+                           
 
+              </div>
 
+              
+        </div>
 
               
           </div>
           <!-- /.col -->
-        </div>
+        <!-- </div> -->
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
@@ -412,24 +473,30 @@
 
 
 <script>
-    $("document").ready( function () {
-      $('#ans').change(function(){  
-           var catID = $(this).val(); 
-          alert(catID); 
-          //  $.ajax({  
-          //       url:"../controller/cateQueController.php",  
-          //       method:"POST",  
-          //       data:{catID:catID},  
-          //       success:function(data){  
-          //            $('#mcq').html(data);
-          //            $("#ans").show();   
-          //       }  
-          //  }); 
-      }); 
-    }); 
+    $(document).on('submit','#userForm',function(e){
+        e.preventDefault();
+        //alert("ok");
+        $.ajax({
+        method:"POST",
+        url: "../controller/cateVidController.php",
+        data:$(this).serialize(),
+        success: function(data){
+        //$('#comments').html(data);
+        // $('#userForm').find('input').val('')
+      
+    }});
+});
 </script>  
-
-
+<script>
+	$(document).ready(function(){
+		$.ajax({
+			url: '../controller/cateVidController.php',
+			success: function(data){
+				$('#comments').html(data);
+			}
+		})
+	});
+</script>
 
 </body>
 </html>
