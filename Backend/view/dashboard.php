@@ -146,6 +146,12 @@
                    <p>MCQ Questions</p>
                  </a>
                </li>
+               <li class="nav-item">
+                 <a href="videoAdd.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Video Tutorials</p>
+                 </a>
+               </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -164,7 +170,7 @@
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/flot.html" class="nav-link">
+                 <a href="videoGame.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -236,7 +242,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="mcqGame.php" class="nav-link">
+            <a href="mcqAdd.php" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                MCQ Game

@@ -119,7 +119,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-item">
+           <li class="nav-item  menu-open">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
@@ -130,20 +130,26 @@
              </a>
              <ul class="nav nav-treeview">
               <li class="nav-item">
-                    <a href="addSubjectCat.php" class="nav-link  active">
+                    <a href="addSubjectCat.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Categories</p>
                     </a>
               </li>
-               <li class="nav-item">
-                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+              <li class="nav-item">
+                 <a href="addQuestions.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Grade 11</p>
+                   <p>MCQ Questions</p>
                  </a>
                </li>
+              <li class="nav-item">
+                    <a href="videoAdd.php" class="nav-link  active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Video Tutorials</p>
+                    </a>
+              </li>
              </ul>
            </li>
-           <li class="nav-item menu-open">
+           <li class="nav-item">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-chart-pie"></i>
                <p>
@@ -153,13 +159,13 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqAdd.php" class="nav-link  active">
+                 <a href="mcqAdd.php" class="nav-link ">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="videoAdd.php" class="nav-link">
+                 <a href="videoGame.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -257,12 +263,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Select Category Quiz</h1>
+            <h1 class="m-0">Video</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">MCQ v1</li>
+              <li class="breadcrumb-item active">Video v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -274,85 +280,141 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
-              <!-- /.card-header -->
+           
+
+
+             
+            <div class="card card-primary card-outline card-tabs">
+              <div class="card-header p-0 pt-1 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">All Videos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Add Videos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Messages</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Settings</a>
+                  </li>
+                </ul>
+              </div>
               <div class="card-body">
+                <div class="tab-content" id="custom-tabs-three-tabContent">
+                  <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                  <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                            <th>VideoId</th>
+                                <th>Name</th>
+                                <th> Path</th>
+                                <th>Image </th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            <?php 
+
+                            $sql = "select * from tblvideos";
+                            $result = mysqli_query($con, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                // output data of each row
+                                while($row = mysqli_fetch_assoc($result)) {
+
+                                if($row['isActive'] == true)
+                                {
+                                    $isActive = "<button type='button' class='btn btn-success'>Active</button>";
+                                }
+                                else{
+                                    $isActive = "<button type='button' class='btn btn-danger'>InActive</button>";
+                                }
+                                echo " <tr>
+                                <td>".$row['vid']."</td>
+                                <td>".$row['videoName']."</td>
+                                <td>".$row['videoPath']."</td>
+                                <td><img src=../controller/uploads/".$row['videoImage']." width=100px></td>
+                                <td><a class='btn btn-danger' href=../controller/categoryController.php?catID=".$row['vid']."> Delete </a></td>
+                                </tr>";
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>     
+                        </tbody>
+                        <tfoot>
+                        
+                                <th>VideoId</th>
+                                <th>Name</th>
+                                <th> Path</th>
+                                <th>Image </th>
+                                <th>Delete</th>
+                        </tfoot>
+                        </table>
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                    
+                    <form action="../controller/cateVidController.php" method="post" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Video Name</label>
+                        <input type="text" name="videoName" class="form-control" id="exampleFormControlInput1" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Video Path</label>
+                        <input type="text" name="videoPath" class="form-control" id="exampleFormControlInput1" required>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Video Category</label>
+                            <?php 
+                                $sql = "select * from tblcategory";
+                                $result = mysqli_query($con, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    // output data of each row
+                                    echo "<select name='videoCategoryId' id='videoCategoryId' class='form-select form-control' aria-label='Default select example'>
+                                            <option >Select the Category </option>";
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value=".$row['catid'].">".$row['categoryName']."</option>";
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                            ?>     
+                            </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                        <input type="file" class="form-control"   name="image" required id="exampleInputPassword1" >
+                     </div>
+                     <input  type="submit" name="videoAdd" class="btn btn-primary mt-3" value="Add New Video">
+                    </form>
+
+
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                     Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
+                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                  </div>
+                </div>
+              </div>
+           
+
+
+
+
+
+
+
+
+
 
 
               
-
-
-
-
-
-
-
-
-
-
-
-                <form action="../controller/cateQueController.php"  method="post">
-                  <?php 
-                  $sql = "select * from tblcategory";
-                  $result = mysqli_query($con, $sql);
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    echo "<select name='cat' id='cat' class='form-select form-control' aria-label='Default select example'>
-                            <option >Select the Category </option>";
-                    while($row = mysqli_fetch_assoc($result)) {
-                      echo "<option value=".$row['catid'].">".$row['categoryName']."</option>";
-                    }
-                  } else {
-                    echo "0 results";
-                  }
-                  ?>     
-            </select>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-              <div id="mcq"> </div>
-              <div id="ans"><input type="submit" name="findans"></div>
-                </form>
-
-              <?php
-              if(isset($_GET['id']))
-              {
-                $sql = "select * from tblmcqtest tmt inner join tblmcqtestans tct on tmt.qid = tct.aid  where tmt.categoryid =".$_GET['id']."";
-
-                $result = mysqli_query($con,$sql);
-
-                if (mysqli_num_rows($result) > 0) {
-        
-            
-              while($row = mysqli_fetch_assoc($result)) {
-             
-                  echo '
-                      <div class="card">
-                          <!-- /.card-header -->
-                          <div class="card-body">
-                          <i class="fas fa-certificate"></i>
-                          '.$row["question"].'
-                          <br>
-                      
-                          <div class="alert alert-secondary  mt-3">
-                            <p><i class="icon fas fa-info"></i> Answer is '.$row["answer"].' </p>
-                          </div>
-                      
-                      </div>
-                      <!-- /.card-body -->
-                  </div>
-                  <!-- /.card --> ';
-            
-             
-                  }
-                } else {
-                  echo "0 results";
-                }
-                        }
-
-              ?>
           </div>
           <!-- /.col -->
         </div>

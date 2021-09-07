@@ -119,7 +119,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-item">
+           <li class="nav-item ">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
@@ -130,20 +130,26 @@
              </a>
              <ul class="nav nav-treeview">
               <li class="nav-item">
-                    <a href="addSubjectCat.php" class="nav-link  active">
+                    <a href="addSubjectCat.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Categories</p>
                     </a>
               </li>
-               <li class="nav-item">
-                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+              <li class="nav-item">
+                 <a href="addQuestions.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Grade 11</p>
+                   <p>MCQ Questions</p>
                  </a>
                </li>
+              <li class="nav-item">
+                    <a href="videoAdd.php" class="nav-link  ">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Video Tutorials</p>
+                    </a>
+              </li>
              </ul>
            </li>
-           <li class="nav-item menu-open">
+           <li class="nav-item  menu-open">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-chart-pie"></i>
                <p>
@@ -153,13 +159,13 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqAdd.php" class="nav-link  active">
+                 <a href="mcqAdd.php" class="nav-link ">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="videoAdd.php" class="nav-link">
+                 <a href="videoGame.php" class="nav-link active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -257,12 +263,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Select Category Quiz</h1>
+            <h1 class="m-0">Video</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">MCQ v1</li>
+              <li class="breadcrumb-item active">Video v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -274,85 +280,55 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body">
+           
+          <div class="row">
+         <?php 
+
+
+          if(isset($_GET['videoID']))
+          {
+            $sql = "SELECT * FROM `tblvideos` WHERE videoCategoryId ='".$_GET['videoID']."'  ";
+
+                  $result = mysqli_query($con,$sql);
+
+                  if (mysqli_num_rows($result) > 0) {
+                      
+                      while($row = mysqli_fetch_assoc($result)) {
+
+                        echo'
+                        <div class="col-sm-4">
+                              <div class="position-relative p-3 bg-gray" style="height: 180px">
+                                <div class="ribbon-wrapper">
+                                  <div class="ribbon bg-primary">
+                                    Ribbon
+                                  </div>
+                                </div>
+                                Ribbon Default <br />
+                                <small>.ribbon-wrapper.ribbon-lg .ribbon</small>
+                              </div>
+                            </div>';
+                          }
+                      } else {
+                          echo "0 results";
+                  }
+          }
+
+
+        
+
+        ?>
+        </div>
+
+       
+
+
+
+
+
+
 
 
               
-
-
-
-
-
-
-
-
-
-
-
-                <form action="../controller/cateQueController.php"  method="post">
-                  <?php 
-                  $sql = "select * from tblcategory";
-                  $result = mysqli_query($con, $sql);
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    echo "<select name='cat' id='cat' class='form-select form-control' aria-label='Default select example'>
-                            <option >Select the Category </option>";
-                    while($row = mysqli_fetch_assoc($result)) {
-                      echo "<option value=".$row['catid'].">".$row['categoryName']."</option>";
-                    }
-                  } else {
-                    echo "0 results";
-                  }
-                  ?>     
-            </select>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-              <div id="mcq"> </div>
-              <div id="ans"><input type="submit" name="findans"></div>
-                </form>
-
-              <?php
-              if(isset($_GET['id']))
-              {
-                $sql = "select * from tblmcqtest tmt inner join tblmcqtestans tct on tmt.qid = tct.aid  where tmt.categoryid =".$_GET['id']."";
-
-                $result = mysqli_query($con,$sql);
-
-                if (mysqli_num_rows($result) > 0) {
-        
-            
-              while($row = mysqli_fetch_assoc($result)) {
-             
-                  echo '
-                      <div class="card">
-                          <!-- /.card-header -->
-                          <div class="card-body">
-                          <i class="fas fa-certificate"></i>
-                          '.$row["question"].'
-                          <br>
-                      
-                          <div class="alert alert-secondary  mt-3">
-                            <p><i class="icon fas fa-info"></i> Answer is '.$row["answer"].' </p>
-                          </div>
-                      
-                      </div>
-                      <!-- /.card-body -->
-                  </div>
-                  <!-- /.card --> ';
-            
-             
-                  }
-                } else {
-                  echo "0 results";
-                }
-                        }
-
-              ?>
           </div>
           <!-- /.col -->
         </div>
