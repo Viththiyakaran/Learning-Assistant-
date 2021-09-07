@@ -281,13 +281,13 @@
         <div class="row">
           <div class="col-12">
            
-          <div class="row">
+          
          <?php 
 
 
-          if(isset($_GET['videoID']))
+          if(isset($_GET['playID']))
           {
-            $sql = "SELECT * FROM `tblvideos` WHERE videoCategoryId ='".$_GET['videoID']."'  ";
+            $sql = "SELECT * FROM `tblvideos` WHERE vid ='".$_GET['playID']."'  ";
 
                   $result = mysqli_query($con,$sql);
 
@@ -296,18 +296,13 @@
                       while($row = mysqli_fetch_assoc($result)) {
 
                         echo'
-                        <div class="col-sm-4">
+                       
                         <div class="position-relative">
-                          <a href="videoPlay.php?playID='.$row['vid'].'"><img src="../controller/uploads/'.$row["videoImage"].'" alt="Photo 1" class="img-fluid"></a>
-                          <div class="ribbon-wrapper ribbon-lg">
-                            <div class="ribbon bg-success text-lg">
-                            Video
-                            </div>
-                            
-                          </div>
-                         <center><b> '.$row["videoName"].'</b></center>
-                        </div>
-                      </div>';
+                        <iframe width="560" height="315"
+                        src='.$row['videoPath'].' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                         allowfullscreen>
+                        </iframe> 
+                        </div> ';
                           }
                       } else {
                           echo "0 results";
@@ -318,8 +313,7 @@
          
 
         ?>
-        </div>
-
+      
        
 
 
