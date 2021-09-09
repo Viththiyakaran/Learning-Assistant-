@@ -130,7 +130,7 @@
                <p>
                 Classes
                  <i class="fas fa-angle-left right"></i>
-                 <span class="badge badge-info right">2</span>
+               
                </p>
              </a>
              <ul class="nav nav-treeview">
@@ -220,7 +220,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-header">EXAMPLES</li>
+           <li class="nav-header">ADVANCED</li>
           
            <li class="nav-item">
              <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
@@ -232,10 +232,17 @@
            </li>';
            }
            else{
-            echo '
+            echo '<li class="nav-item">
+            <a href="dashboard.php" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-users-cog"></i>
               <p>
                Profile
               </p>
@@ -243,7 +250,7 @@
           </li>
           <li class="nav-item">
             <a href="mcqAdd.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon far fa-question-circle"></i>
               <p>
                MCQ Game
               </p>
@@ -251,13 +258,13 @@
           </li>
           <li class="nav-item">
           <a href="videoGame.php" class="nav-link">
-            <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-video"></i>
             <p>
              Video Tutorils
             </p>
           </a>
         </li>
-         <li class="nav-header">EXAMPLES</li>
+         <li class="nav-header">ADVANCED</li>
           <li class="nav-item">
             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

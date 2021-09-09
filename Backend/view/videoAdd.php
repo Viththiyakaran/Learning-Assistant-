@@ -99,11 +99,11 @@
                with font-awesome or any other icon font library -->
 
 
-           <?php  
+               <?php  
            if($_SESSION['type'] == "Admin") 
            {
              echo '<li class="nav-item">
-             <a href="dashboard.php" class="nav-link">
+             <a href="dashboard.php" class="nav-link ">
                <i class="nav-icon fas fa-tachometer-alt"></i>
                <p>
                  Dashboard
@@ -111,7 +111,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="students.php" class="nav-link  ">
+             <a href="students.php" class="nav-link ">
                <i class="nav-icon fas fa-th"></i>
                <p>
                 Students
@@ -119,34 +119,34 @@
                </p>
              </a>
            </li>
-           <li class="nav-item  menu-open">
+           <li class="nav-item menu-open">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
                 Classes
                  <i class="fas fa-angle-left right"></i>
-                 <span class="badge badge-info right">2</span>
+               
                </p>
              </a>
              <ul class="nav nav-treeview">
-              <li class="nav-item">
-                    <a href="addSubjectCat.php" class="nav-link ">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Categories</p>
-                    </a>
-              </li>
-              <li class="nav-item">
-                 <a href="addQuestions.php" class="nav-link">
+               <li class="nav-item">
+                 <a href="addSubjectCat.php" class="nav-link ">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Categories</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="addQuestions.php" class="nav-link ">
                    <i class="far fa-circle nav-icon"></i>
                    <p>MCQ Questions</p>
                  </a>
                </li>
-              <li class="nav-item">
-                    <a href="videoAdd.php" class="nav-link  active">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Video Tutorials</p>
-                    </a>
-              </li>
+               <li class="nav-item">
+                 <a href="videoAdd.php" class="nav-link active">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Video Tutorials</p>
+                 </a>
+               </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -159,7 +159,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqAdd.php" class="nav-link ">
+                 <a href="mcqadd.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
@@ -227,27 +227,42 @@
            </li>';
            }
            else{
-               echo '
-               <li class="nav-item">
-               <a href="profile.php" class="nav-link">
-                 <i class="nav-icon fas fa-edit"></i>
-                 <p>
-                  Profile
-                 </p>
-               </a>
-             </li>
-            <li class="nav-header">EXAMPLES</li>
-             <li class="nav-item">
-               <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
-                 <i class="nav-icon fas fa-sign-out-alt"></i>
-                 <p>
-                  Logout
-                 </p>
-               </a>
-             </li>';
-           }
+            echo '
+            <li class="nav-item">
+            <a href="profile.php" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="mcqAdd.php" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               MCQ Game
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a href="videoGame.php" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+             Video Tutorils
+            </p>
+          </a>
+        </li>
+         <li class="nav-header">EXAMPLES</li>
+          <li class="nav-item">
+            <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+               Logout
+              </p>
+            </a>
+          </li>';
+        }
           ?>
-
        
         </ul>
       </nav>
@@ -293,12 +308,7 @@
                   <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Add Videos</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Messages</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Settings</a>
-                  </li>
+                  
                 </ul>
               </div>
               <div class="card-body">
@@ -394,12 +404,7 @@
 
 
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
-                     Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
-                     Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-                  </div>
+                 
                 </div>
               </div>
            

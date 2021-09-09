@@ -99,11 +99,11 @@
                with font-awesome or any other icon font library -->
 
 
-           <?php  
+               <?php  
            if($_SESSION['type'] == "Admin") 
            {
              echo '<li class="nav-item">
-             <a href="dashboard.php" class="nav-link">
+             <a href="dashboard.php" class="nav-link ">
                <i class="nav-icon fas fa-tachometer-alt"></i>
                <p>
                  Dashboard
@@ -111,7 +111,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="students.php" class="nav-link  ">
+             <a href="students.php" class="nav-link ">
                <i class="nav-icon fas fa-th"></i>
                <p>
                 Students
@@ -119,26 +119,32 @@
                </p>
              </a>
            </li>
-           <li class="nav-item">
+           <li class="nav-item ">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
                 Classes
                  <i class="fas fa-angle-left right"></i>
-                 <span class="badge badge-info right">2</span>
+               
                </p>
              </a>
              <ul class="nav nav-treeview">
-              <li class="nav-item">
-                    <a href="addSubjectCat.php" class="nav-link  active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Categories</p>
-                    </a>
-              </li>
                <li class="nav-item">
-                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                 <a href="addSubjectCat.php" class="nav-link ">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Grade 11</p>
+                   <p>Categories</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="addQuestions.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>MCQ Questions</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="videoAdd.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Video Tutorials</p>
                  </a>
                </li>
              </ul>
@@ -151,15 +157,15 @@
                  <i class="right fas fa-angle-left"></i>
                </p>
              </a>
-             <ul class="nav nav-treeview">
+             <ul class="nav nav-treeview ">
                <li class="nav-item">
-                 <a href="mcqAdd.php" class="nav-link  active">
+                 <a href="mcqadd.php" class="nav-link  active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="videoAdd.php" class="nav-link">
+                 <a href="videoGame.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -221,25 +227,49 @@
            </li>';
            }
            else{
-               echo '
-               <li class="nav-item">
-               <a href="profile.php" class="nav-link">
-                 <i class="nav-icon fas fa-edit"></i>
-                 <p>
-                  Profile
-                 </p>
-               </a>
-             </li>
-            <li class="nav-header">EXAMPLES</li>
-             <li class="nav-item">
-               <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
-                 <i class="nav-icon fas fa-sign-out-alt"></i>
-                 <p>
-                  Logout
-                 </p>
-               </a>
-             </li>';
-           }
+            echo '
+            <li class="nav-item">
+             <a href="dashboard.php" class="nav-link">
+               <i class="nav-icon fas fa-tachometer-alt"></i>
+               <p>
+                 Dashboard
+               </p>
+             </a>
+           </li>
+            <li class="nav-item">
+            <a href="profile.php" class="nav-link">
+            <i class="nav-icon fas fa-users-cog"></i>
+              <p>
+               Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="mcqAdd.php" class="nav-link active">
+              <i class="nav-icon far fa-question-circle"></i>
+              <p>
+               MCQ Game
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a href="videoGame.php" class="nav-link">
+            <i class="nav-icon fas fa-video"></i>
+            <p>
+             Video Tutorils
+            </p>
+          </a>
+        </li>
+         <li class="nav-header">ADVANCED</li>
+          <li class="nav-item">
+            <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+               Logout
+              </p>
+            </a>
+          </li>';
+        }
           ?>
 
        
