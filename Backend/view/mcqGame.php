@@ -211,7 +211,7 @@
            <li class="nav-header">EXAMPLES</li>
           
            <li class="nav-item">
-             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+             <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
                <p>
                 Logout
@@ -239,7 +239,7 @@
            </li>
             <li class="nav-header">EXAMPLES</li>
              <li class="nav-item">
-               <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+               <a href="../controller/sessionController.php?q=logout" class="nav-link">
                  <i class="nav-icon fas fa-sign-out-alt"></i>
                  <p>
                   Logout

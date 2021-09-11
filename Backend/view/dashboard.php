@@ -6,8 +6,14 @@
  }  
  
 include('../controller/countController.php');
+include('../controller/regController.php');
 
 
+$IP = get_client_ip();
+$sqlLog = "INSERT INTO `tblloginlog`( `userName`, `userType`, `loginDateAndTime`, `logStatus`) 
+VALUES ('".$_SESSION["username"]."','".$_SESSION["type"]."',now(), '".$IP ."')";
+
+mysqli_query($con,$sqlLog);
 
  ?>
 
@@ -16,7 +22,7 @@ include('../controller/countController.php');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simple  </title>
+  <title>Simple </title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -227,7 +233,7 @@ include('../controller/countController.php');
            <li class="nav-header">ADVANCED</li>
           
            <li class="nav-item">
-             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+             <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
                <p>
                 Logout
@@ -270,7 +276,7 @@ include('../controller/countController.php');
         </li>
          <li class="nav-header">ADVANCED</li>
           <li class="nav-item">
-            <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+            <a href="../controller/sessionController.php?q=logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                Logout
@@ -423,7 +429,6 @@ include('../controller/countController.php');
               </div>
             </div>
             <!-- ./col -->
-            
            
           </div>';
 

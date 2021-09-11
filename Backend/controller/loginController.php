@@ -19,10 +19,11 @@
         // If result matched $myusername and $mypassword, table row must be 1 row
         
         if($count == 1) {
-        echo("<script>console.log('Date');</script>");
+        
         session_start();
         $_SESSION['username'] = $myusername;
         $_SESSION['type'] = $mytype;
+        
         header("location:../view/dashboard.php");  
         }else {
 
