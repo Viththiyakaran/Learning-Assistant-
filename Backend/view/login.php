@@ -63,7 +63,7 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <button type="submit" class="btn btn-danger btn-block">Sign In</button>
+            <button type="reset" class="btn btn-danger btn-block">Reset</button>
           </div>
           <!-- /.col -->
           <div class="col-6">
