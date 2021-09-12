@@ -6,6 +6,12 @@
  }  
  
  include('../model/db.php');
+ include('../controller/regController.php');
+ $ua=getBrowser();
+ $IP = get_client_ip();
+ $sqlUserLog = "INSERT INTO `tbluseractivitylog`(`actUserName`, `activity`, `actDataAndTime`, `actIPAddress`, `actBrowserName`, `actOS`, `actBrowserAgent`) 
+ VALUES ('".$_SESSION["username"]."','Video',now(), '".$IP ."','". $ua['name']."','". $ua['platform']."','". $ua['userAgent']."')";
+ mysqli_query($con,$sqlUserLog);
  
 
  

@@ -7,18 +7,11 @@
  
 include('../controller/countController.php');
 include('../controller/regController.php');
-
-
 $ua=getBrowser();
 $IP = get_client_ip();
 $sqlLog = "INSERT INTO `tblloginlog`( `userName`, `userType`, `loginDateAndTime`, `logIPAddress`, `logBrowserName`, `logBrowserVersion`, `logOS`, `logBrowserAgent`) 
 VALUES ('".$_SESSION["username"]."','".$_SESSION["type"]."',now(), '".$IP ."','". $ua['name']."','". $ua['version']."','". $ua['platform']."','". $ua['userAgent']."')";
-
 mysqli_query($con,$sqlLog);
-
-
-
-
 
  ?>
 
@@ -49,10 +42,9 @@ mysqli_query($con,$sqlLog);
   <link rel="stylesheet" href="../public/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../public/plugins/summernote/summernote-bs4.min.css">
-
-  
   <!-- Theme style -->
   <link rel="stylesheet" href="../public/dist/css/adminlte.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -459,7 +451,7 @@ mysqli_query($con,$sqlLog);
              <!-- DONUT CHART -->
              <div class="card card-danger">
                 <div class="card-header">
-                  <h3 class="card-title">Donut Chart</h3>
+                  <h3 class="card-title">Users Activities</h3>
   
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -471,7 +463,37 @@ mysqli_query($con,$sqlLog);
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Date</th>
+                  <th>Acitivity</th>
+                  <th>IP Address</th>
+                  <th>OS</th> 
+                </tr>
+                </thead>
+                <tbody>
+               '; 
+               $sql = "select * from tbluseractivitylog order by actid desc limit 5";
+                $result = mysqli_query($con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                  // output data of each row
+                  while($row = mysqli_fetch_assoc($result)) {
+                    echo " <tr>
+                    <td>".$row['actUserName']."</td>
+                    <td>".$row['actDataAndTime']."</td>
+                    <td>".$row['activity']."</td>
+                    <td>".$row['actIPAddress']."</td>
+                    <td>".$row['actOS']."</td>
+                  </tr>";
+                  }
+                } else {
+                  echo "0 results";
+                }
+              
+               echo ' </tbody>
+              </table>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -511,17 +533,128 @@ mysqli_query($con,$sqlLog);
                     </tr>
                     </thead>
                     <tbody>
-                    
-                  
-  
                    '; 
                    $sql = "select * from tblloginlog order by logID desc limit 5";
                     $result = mysqli_query($con, $sql);
                     if (mysqli_num_rows($result) > 0) {
                       // output data of each row
                       while($row = mysqli_fetch_assoc($result)) {
+                        echo " <tr>
+                        <td>".$row['logIPAddress']."</td>
+                        <td>".$row['logOS']."</td>
+                        <td>".$row['userName']."</td>
+                      </tr>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                  
+                   echo ' </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              
+            </section>
+            <!-- right col -->
+          </div>';
+           }else{
+            echo '<div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7 connectedSortable">
+              
+              
+             <!-- DONUT CHART -->
+             <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Activities of '. $_SESSION['username'].' </h3>
   
-                        
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Date</th>
+                  <th>Acitivity</th>
+                  <th>IP Address</th>
+                  <th>OS</th> 
+                </tr>
+                </thead>
+                <tbody>
+               '; 
+               $sql = "select * from tbluseractivitylog where actUserName = '". $_SESSION['username']."' order by actid desc limit 5";
+                $result = mysqli_query($con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                  // output data of each row
+                  while($row = mysqli_fetch_assoc($result)) {
+                    echo " <tr>
+                    <td>".$row['actUserName']."</td>
+                    <td>".$row['actDataAndTime']."</td>
+                    <td>".$row['activity']."</td>
+                    <td>".$row['actIPAddress']."</td>
+                    <td>".$row['actOS']."</td>
+                  </tr>";
+                  }
+                } else {
+                  echo "0 results";
+                }
+              
+               echo ' </tbody>
+              </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            
+  
+              <!-- TO DO List -->
+             
+              <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-5 connectedSortable">
+               <!-- DONUT CHART -->
+             <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Last Active  :'. $_SESSION['username'].'</h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>IP Address</th>
+                      <th>OS</th>
+                      <th>OS</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                   '; 
+                   $sql = "select * from tblloginlog where userName = '". $_SESSION['username']."' order  by logID desc limit 5";
+                    $result = mysqli_query($con, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                      // output data of each row
+                      while($row = mysqli_fetch_assoc($result)) {
                         echo " <tr>
                         <td>".$row['logIPAddress']."</td>
                         <td>".$row['logOS']."</td>
