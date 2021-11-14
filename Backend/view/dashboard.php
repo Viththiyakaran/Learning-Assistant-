@@ -163,6 +163,12 @@ mysqli_query($con,$sqlLog);
                    <p>Video Tutorials</p>
                  </a>
                </li>
+               <li class="nav-item">
+               <a href="noteAdd.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Notes</p>
+               </a>
+             </li>
              </ul>
            </li>
            <li class="nav-item">
