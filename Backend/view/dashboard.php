@@ -198,33 +198,10 @@ mysqli_query($con,$sqlLog);
                    <p>One to one</p>
                  </a>
                </li>
-             </ul>
-           </li>
-           <li class="nav-item">
-             <a href="#" class="nav-link">
-               <i class="nav-icon fas fa-tree"></i>
-               <p>
-                 Analysis 
-                 <i class="fas fa-angle-left right"></i>
-               </p>
-             </a>
-             <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="pages/UI/general.html" class="nav-link">
+                 <a href="pages/charts/inline.html" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Logins</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/UI/icons.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Marks</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/UI/buttons.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Subjects</p>
+                   <p>One to one</p>
                  </a>
                </li>
              </ul>
