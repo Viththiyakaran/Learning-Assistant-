@@ -309,7 +309,7 @@
                   
                  <?php 
 
-                  $sql = "select * from tbllogin where type = 'user'";
+                  $sql = "select * from tbllogin where type = 'user' and isactive = 1";
                   $result = mysqli_query($con, $sql);
                   if (mysqli_num_rows($result) > 0) {
                     // output data of each row
@@ -329,7 +329,7 @@
                       
                       <td>".$row['createdDate']."</td>
                       <td>".$isActive."</td>
-                      <td><a class='btn btn-primary' href=certifications_print.php?cerID=".$row['loginID']."> Generate </a></td>
+                      <td><a class='btn btn-primary' href=certifications_print.php?loginID=".$row['loginID']."> Generate </a></td>
                     </tr>";
                     }
                   } else {

@@ -1,35 +1,6 @@
-
-<?php
-include("../model/db.php");
-
-if(isset($_GET['loginID'])){
-
-  $sql = "select * from tbllogin tl inner join tblinstitution ti on tl.institutionID = ti.instID where tl.loginID='".$_GET['loginID']."'  ";
-  
-  $result = mysqli_query($con, $sql);
-  if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-
-       $fullname = $row['fullname'];
-       $instaLogo  = $row['instaLogo'];
-    }
-  } else {
-    echo "0 results";
-  }
-
-  }
-
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Certificate of <?php echo $fullname; ?> </title>
-
-  <style type='text/css'>
+<html>
+    <head>
+        <style type='text/css'>
             body, html {
                 margin: 0;
                 padding: 0;
@@ -43,8 +14,8 @@ if(isset($_GET['loginID'])){
             }
             .container {
                 border: 20px solid tan;
-                width: 1000px;
-                height: 650px;
+                width: 750px;
+                height: 563px;
                 display: table-cell;
                 vertical-align: middle;
             }
@@ -72,12 +43,10 @@ if(isset($_GET['loginID'])){
             }
         </style>
     </head>
-</head>
-<body>
-<body>
+    <body>
         <div class="container">
             <div class="logo">
-              <img src="../controller/uploads/<?php echo $instaLogo; ?>" width="200px">  
+                An Organization
             </div>
 
             <div class="marquee">
@@ -89,17 +58,13 @@ if(isset($_GET['loginID'])){
             </div>
 
             <div class="person">
-                <?php echo  $fullname; ?> 
+                Joe Nathan
             </div>
 
             <div class="reason">
-               has completed the course<br/>
-                Software Development
+                For deftly defying the laws of gravity<br/>
+                and flying high
             </div>
         </div>
     </body>
-<script>
-  window.addEventListener("load", window.print());
-</script>
-</body>
 </html>
