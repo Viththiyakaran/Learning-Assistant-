@@ -18,23 +18,20 @@ mysqli_query($con,$sqlLog);
 
 <?php 
 
-$sql = "select * from tbllogin where username = '".$_SESSION["username"]."'";
+$sql = "select * from tblinstitution";
 $result = mysqli_query($con,$sql);
 
 if (mysqli_num_rows($result) > 0) {
     
     while($row = mysqli_fetch_assoc($result)) {
 
-      $loginID = $row['loginID'];
-      $fullname = $row['fullname'];
-      $username = $row['username'];
-      $type = $row['type'];
-      $password = $row['password'];
-      $email = $row['email'];
-      $address = $row['address'];
-      $hobbies = $row['hobbies'];
-      $dob  = $row['dob'];
-      $contactnumber = $row['contactnumber'];
+        $instID  = $row['instID'];
+        $instName = $row['instName'];
+        $instaAddress = $row['instaAddress'];
+        $instaLogo = $row['instaLogo'];
+        $instaRegistratioNo = $row['instaRegistratioNo'];
+        $instaContactNumber = $row['instaContactNumber'];
+        $instaEmail = $row['instaEmail'];
 
         }
     } else {
@@ -149,7 +146,7 @@ if (mysqli_num_rows($result) > 0) {
            if($_SESSION['type'] == "Admin") 
            {
              echo '<li class="nav-item">
-             <a href="dashboard.php" class="nav-link active">
+             <a href="dashboard.php" class="nav-link ">
                <i class="nav-icon fas fa-tachometer-alt"></i>
                <p>
                  Dashboard
@@ -245,7 +242,14 @@ if (mysqli_num_rows($result) > 0) {
              </a>
            </li>
            <li class="nav-header">ADVANCED</li>
-          
+           <li class="nav-item">
+           <a href="institutionSetup.php" class="nav-link active">
+             <i class="nav-icon fas fa-university"></i>
+             <p>
+              Institution
+             </p>    
+           </a>
+           </li>
            <li class="nav-item">
              <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -324,12 +328,12 @@ if (mysqli_num_rows($result) > 0) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Profile</h1>
+            <h1 class="m-0">Institution</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Profile v1</li>
+              <li class="breadcrumb-item active">Institution v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -346,26 +350,33 @@ if (mysqli_num_rows($result) > 0) {
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
+
+                <?php
+                        if($instaLogo == "")
+                        {
+                            $instaLogo = "AdminLTELogo.png";
+                        }
+                ?>
                   <img class="profile-user-img img-fluid img-circle"
-                       src="../public/dist/img/user4-128x128.jpg"
+                       src="../controller/uploads/<?php echo $instaLogo; ?>"
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center"><?php echo $fullname; ?> </h3>
+                <h3 class="profile-username text-center"><?php echo $instName; ?> </h3>
 
-                <p class="text-muted text-center">STU : <?php echo  $loginID; ?> </p>
+                <p class="text-muted text-center">Institution Reg.NO: <?php echo  $instaRegistratioNo; ?> </p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Mobile : </b> <a class="float-right"><?php echo  $contactnumber; ?></a>
+                    <b>Mobile : </b> <a class="float-right"><?php echo  $instaContactNumber; ?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Email : </b> <a class="float-right"><?php echo  $email; ?></a>
+                    <b>Email : </b> <a class="float-right"><?php echo  $instaEmail; ?></a>
                   </li>
                  
                 </ul>
 
-                <a href="mcqAdd.php" class="btn btn-primary btn-block"><b>Start Activities</b></a>
+                <a href="students.php" class="btn btn-primary btn-block"><b>See Students</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -375,56 +386,48 @@ if (mysqli_num_rows($result) > 0) {
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <div class="card">
+            <div class="card card-primary card-outline">
              
-            <form action="../controller/studentController.php" method="post"> 
+            <form action="../controller/institutionController.php" method="post" enctype="multipart/form-data"> 
                 <div class="card-body">
                 <div class="form-group">
                    
-                    <input type="hidden" class="form-control" name="loginID" value="<?php echo $loginID; ?>" >
+                    <input type="hidden" class="form-control" name="instID" value="<?php echo $instID; ?>" >
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Full Name</label>
-                    <input type="text" class="form-control" name="fullname" value="<?php echo $fullname; ?>" placeholder="Enter Fullname">
+                    <label for="exampleInputEmail1">Institution Name</label>
+                    <input type="text" class="form-control" name="instName" value="<?php echo $instName; ?>" placeholder="Enter Institution Name">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" readonly name="username" value="<?php echo $username; ?>" placeholder="Enter Username">
+                    <label for="exampleInputEmail1">Institution Address</label>
+                    <input type="text" class="form-control"  name="instaAddress" value="<?php echo $instaAddress; ?>" placeholder="Enter Institution Address">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Institution Email</label>
+                    <input type="email" class="form-control" name="instaEmail" value="<?php echo $instaEmail; ?>"  placeholder="Enter Institution Email">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="text" class="form-control" name="password" value="<?php echo $password; ?>"  placeholder="Enter Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Email</label>
-                    <input type="email" class="form-control" name="email" value="<?php echo $email; ?>"  placeholder="Enter Email">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Address</label>
-                    <input type="text" class="form-control" name="address" value="<?php echo $address; ?>"  placeholder="Enter Address">
+                    <label for="exampleInputPassword1">Institution Registration No </label>
+                    <input type="text" class="form-control" name="instaRegistratioNo" value="<?php echo $instaRegistratioNo; ?>"  placeholder="Enter Institution RegistratioNo">
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Hobbies</label>
-                    <input type="text" class="form-control" name="hobbies" value="<?php echo $hobbies; ?>"  placeholder="Enter Hobbies">
+                    <label for="exampleInputPassword1">Institution Contact</label>
+                    <input type="text" class="form-control" name="instaContactNumber" value="<?php echo $instaContactNumber; ?>"  placeholder="Enter Contact Number">
                   </div>
 
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Date of birth</label>
-                    <input type="date" class="form-control" name="dob" value="<?php echo $dob; ?>"  placeholder="Enter Date of birth">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Contact</label>
-                    <input type="text" class="form-control" name="contactnumber" value="<?php echo $contactnumber; ?>"  placeholder="Enter Date of birth">
-                  </div>
+                  <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Institution  Logo</label>
+                        <input type="file" class="form-control" required   name="image" id="exampleInputPassword1" >
+                     </div>
                 
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
                   
-                  <input type="submit" name="stuupdate" class="btn btn-primary" value="Update">
+                  <input type="submit" name="instaupdate" class="btn btn-primary" value="Update">
                  </div>
               </form>
              

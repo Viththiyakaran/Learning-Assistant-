@@ -230,15 +230,14 @@ mysqli_query($con,$sqlUserLog);
            </li>';
            }
            else{
-            echo '
-            <li class="nav-item">
-             <a href="dashboard.php" class="nav-link">
-               <i class="nav-icon fas fa-tachometer-alt"></i>
-               <p>
-                 Dashboard
-               </p>
-             </a>
-           </li>
+            echo '<li class="nav-item">
+            <a href="dashboard.php" class="nav-link ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
             <i class="nav-icon fas fa-users-cog"></i>
@@ -260,6 +259,14 @@ mysqli_query($con,$sqlUserLog);
             <i class="nav-icon fas fa-video"></i>
             <p>
              Video Tutorils
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="readNote.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>
+            Read Notes  
             </p>
           </a>
         </li>

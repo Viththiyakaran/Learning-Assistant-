@@ -234,8 +234,8 @@
            </li>';
            }
            else{
-            echo ' <li class="nav-item">
-            <a href="dashboard.php" class="nav-link">
+            echo '<li class="nav-item">
+            <a href="dashboard.php" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -244,7 +244,7 @@
           </li>
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-users-cog"></i>
               <p>
                Profile
               </p>
@@ -252,7 +252,7 @@
           </li>
           <li class="nav-item">
             <a href="mcqAdd.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon far fa-question-circle"></i>
               <p>
                MCQ Game
               </p>
@@ -260,9 +260,17 @@
           </li>
           <li class="nav-item">
           <a href="videoGame.php" class="nav-link active">
-            <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-video"></i>
             <p>
              Video Tutorils
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="readNote.php" class="nav-link ">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>
+            Read Notes  
             </p>
           </a>
         </li>

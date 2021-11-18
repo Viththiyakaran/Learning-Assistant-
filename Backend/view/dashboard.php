@@ -199,15 +199,15 @@ mysqli_query($con,$sqlLog);
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
+                 <a href="readNote.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
+                   <p>Read Notes</p>
                  </a>
                </li>
              </ul>
            </li>
            <li class="nav-item">
-             <a href="#" class="nav-link">
+             <a href="certifications.php" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
                <p>
                 Certifications
@@ -215,7 +215,14 @@ mysqli_query($con,$sqlLog);
              </a>
            </li>
            <li class="nav-header">ADVANCED</li>
-          
+           <li class="nav-item">
+           <a href="institutionSetup.php" class="nav-link">
+             <i class="nav-icon fas fa-university"></i>
+             <p>
+              Institution
+             </p>    
+           </a>
+           </li>
            <li class="nav-item">
              <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -255,6 +262,14 @@ mysqli_query($con,$sqlLog);
             <i class="nav-icon fas fa-video"></i>
             <p>
              Video Tutorils
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="readNote.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>
+            Read Notes  
             </p>
           </a>
         </li>

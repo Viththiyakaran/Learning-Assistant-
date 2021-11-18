@@ -6,16 +6,6 @@
  }  
  
  include('../model/db.php');
- include('../controller/regController.php');
- $ua=getBrowser();
- $IP = get_client_ip();
- $sqlUserLog = "INSERT INTO `tbluseractivitylog`(`actUserName`, `activity`, `actDataAndTime`, `actIPAddress`, `actBrowserName`, `actOS`, `actBrowserAgent`) 
- VALUES ('".$_SESSION["username"]."','Video',now(), '".$IP ."','". $ua['name']."','". $ua['platform']."','". $ua['userAgent']."')";
- mysqli_query($con,$sqlUserLog);
- 
-
- 
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +13,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Simple</title>
- 
-  
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -105,7 +94,6 @@
                with font-awesome or any other icon font library -->
 
 
-           
                <?php  
            if($_SESSION['type'] == "Admin") 
            {
@@ -126,7 +114,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-item ">
+           <li class="nav-item">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
@@ -137,7 +125,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="addSubjectCat.php" class="nav-link ">
+                 <a href="addSubjectCat.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Categories</p>
                  </a>
@@ -156,7 +144,7 @@
                </li>
              </ul>
            </li>
-           <li class="nav-item menu-open">
+           <li class="nav-item">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-chart-pie"></i>
                <p>
@@ -164,15 +152,15 @@
                  <i class="right fas fa-angle-left"></i>
                </p>
              </a>
-             <ul class="nav nav-treeview ">
+             <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqadd.php" class="nav-link  ">
+                 <a href="mcqadd.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="videoGame.php" class="nav-link active">
+                 <a href="videoGame.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -215,7 +203,7 @@
              </ul>
            </li>
            <li class="nav-item">
-             <a href="#" class="nav-link">
+             <a href="certifications.php" class="nav-link active">
                <i class="nav-icon fas fa-edit"></i>
                <p>
                 Certifications
@@ -234,17 +222,10 @@
            </li>';
            }
            else{
-            echo '<li class="nav-item">
-            <a href="dashboard.php" class="nav-link ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
+            echo '
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
-            <i class="nav-icon fas fa-users-cog"></i>
+              <i class="nav-icon fas fa-edit"></i>
               <p>
                Profile
               </p>
@@ -252,7 +233,7 @@
           </li>
           <li class="nav-item">
             <a href="mcqAdd.php" class="nav-link">
-              <i class="nav-icon far fa-question-circle"></i>
+              <i class="nav-icon fas fa-edit"></i>
               <p>
                MCQ Game
               </p>
@@ -260,21 +241,13 @@
           </li>
           <li class="nav-item">
           <a href="videoGame.php" class="nav-link">
-            <i class="nav-icon fas fa-video"></i>
+            <i class="nav-icon fas fa-edit"></i>
             <p>
              Video Tutorils
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="readNote.php" class="nav-link active">
-            <i class="nav-icon fas fa-clipboard"></i>
-            <p>
-            Read Notes  
-            </p>
-          </a>
-        </li>
-         <li class="nav-header">ADVANCED</li>
+         <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="../controller/sessionController.php?q=logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -285,7 +258,6 @@
           </li>';
         }
           ?>
-
 
        
         </ul>
@@ -302,12 +274,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Notes</h1>
+            <h1 class="m-0">Certification</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Notes v1</li>
+              <li class="breadcrumb-item active">Certification v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -319,33 +291,66 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-           
-         <div class="row">
-         <?php 
-        $sql = "select DISTINCT tc.catid , tc.categoryName from tblnotes tn inner join tblcategory tc on tn.noteCatID = tc.catid ";
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Student ID </th>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>Join Date</th>
+                    <th>Status</th>
+                    <th>Certification</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                 <?php 
 
-        $result = mysqli_query($con,$sql);
+                  $sql = "select * from tbllogin where type = 'user'";
+                  $result = mysqli_query($con, $sql);
+                  if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result)) {
 
-        if (mysqli_num_rows($result) > 0) {
-            
-            while($row = mysqli_fetch_assoc($result)) {
-
-               echo'
-               <div class="col-md-4">
-               <a href=noteList.php?noteID='.$row['catid'].'><div class="callout callout-danger">
-                  <h5>'.$row['categoryName'].'</h5>
-                  <p>Read the Book gain the knowlege</p>
-                </div></a>
-             </div>';
-                }
-            } else {
-                echo "0 results";
-         }
-
-        ?>
-        </div>
-
-         
+                      if($row['isActive'] == true)
+                      {
+                        $isActive = "<button type='button' class='btn btn-success'>Active</button>";
+                      }
+                      else{
+                        $isActive = "<button type='button' class='btn btn-danger'>InActive</button>";
+                      }
+                      echo " <tr>
+                      <td>".$row['loginID']."</td>
+                      <td>".$row['fullname']."</td>
+                      <td>".$row['email']."</td>
+                      
+                      <td>".$row['createdDate']."</td>
+                      <td>".$isActive."</td>
+                      <td><a class='btn btn-primary' href=certifications_print.php?cerID=".$row['loginID']."> Generate </a></td>
+                    </tr>";
+                    }
+                  } else {
+                    echo "0 results";
+                  }
+                  ?>     
+                  </tbody>
+                  <tfoot>
+                  <th>Student ID </th>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    
+                    <th>Join Date</th>
+                    <th>Status</th>
+                    <th>View</th>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
           </div>
           <!-- /.col -->
         </div>
@@ -371,7 +376,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
 <!-- jQuery -->
 <script src="../public/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -395,12 +400,10 @@
 <script src="../public/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-    $("#ans").hide();
-
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -413,45 +416,5 @@
     });
   });
 </script>
-
-<script>
-    $("document").ready( function () {
-      $('#cat').change(function(){  
-           var catID = $(this).val(); 
-          //alert(catID); 
-           $.ajax({  
-                url:"../controller/cateQueController.php",  
-                method:"POST",  
-                data:{catID:catID},  
-                success:function(data){  
-                     $('#mcq').html(data);
-                     $("#ans").show();   
-                }  
-           }); 
-      }); 
-    }); 
-</script>  
-
-
-<script>
-    $("document").ready( function () {
-      $('#ans').change(function(){  
-           var catID = $(this).val(); 
-          alert(catID); 
-          //  $.ajax({  
-          //       url:"../controller/cateQueController.php",  
-          //       method:"POST",  
-          //       data:{catID:catID},  
-          //       success:function(data){  
-          //            $('#mcq').html(data);
-          //            $("#ans").show();   
-          //       }  
-          //  }); 
-      }); 
-    }); 
-</script>  
-
-
-
 </body>
 </html>
