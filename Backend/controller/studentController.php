@@ -49,5 +49,39 @@ if(isset($_POST['update']))
 
  echo "it working";
 }
+//=====================================================================================================================//
+
+
+if(isset($_POST['stuupdate']))
+{
+    $loginID = $_POST['loginID'];
+    $username = $_POST['username'];
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password'];
+    $dob = $_POST['dob'];
+    $contactnumber = $_POST['contactnumber'];
+    $address = $_POST['address'];
+    $hobbies = $_POST['hobbies'];
+    
+
+    $sql = "UPDATE `tbllogin` SET `username`='".$username."',`password`='".$password."',`password2`='".$password2."',
+    `email`='".$email."',`fullname`='". $fullname ."',`updatedDate`=now(),
+    `address`='".$address."',`hobbies`='".$hobbies."',`dob`='". $dob."',`contactnumber`='".$contactnumber."' WHERE loginID ='". $loginID."'";
+
+    
+   if(mysqli_query($con , $sql))
+   {
+        echo '<script type="text/javascript">alert("Student details has been updated") </script>' ;
+        header("location: sessionController.php?q=logout");
+   }
+   else 
+   {
+       echo '<script>alert("Sorry ! Check The System") </script>' ;
+   }
+
+ echo "it working";
+}
 
 ?>

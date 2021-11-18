@@ -28,7 +28,7 @@
         }else {
 
         echo '<script>alert("Your Login Name or Password is invalid") </script>' ;
-        header("location:../index.php");  
+        header("location:../index.php?q=wronglogin");  
         }
 
   }
