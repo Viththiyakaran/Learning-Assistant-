@@ -4,7 +4,8 @@ include("../model/db.php");
 
 if(isset($_GET['loginID'])){
 
-  $sql = "select * from tbllogin tl inner join tblinstitution ti on tl.institutionID = ti.instID where tl.loginID='".$_GET['loginID']."'  ";
+  $sql = "select * from tbllogin tl inner join tblinstitution ti 
+  on tl.institutionID = ti.instID where tl.loginID='".$_GET['loginID']."'  ";
   
   $result = mysqli_query($con, $sql);
   if (mysqli_num_rows($result) > 0) {

@@ -6,9 +6,9 @@
  }  
  
  include('../model/db.php');
- 
 
- 
+ include('../controller/meetingController.php');
+
 
  ?>
 <!DOCTYPE html>
@@ -136,13 +136,13 @@
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="addQuestions.php" class="nav-link ">
+                 <a href="addQuestions.php" class="nav-link active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>MCQ Questions</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="videoAdd.php" class="nav-link active">
+                 <a href="videoAdd.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Video Tutorials</p>
                  </a>
@@ -218,7 +218,7 @@
            <li class="nav-header">EXAMPLES</li>
           
            <li class="nav-item">
-             <a href="../controller/sessionController.php?q=logout" class="nav-link">
+             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
                <p>
                 Logout
@@ -230,7 +230,7 @@
             echo '
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-users-cog"></i>
               <p>
                Profile
               </p>
@@ -278,12 +278,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Video</h1>
+            <h1 class="m-0">Meetings</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Video v1</li>
+              <li class="breadcrumb-item active">Meetings v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -295,130 +295,164 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-           
-
-
-             
-            <div class="card card-primary card-outline card-tabs">
-              <div class="card-header p-0 pt-1 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">All Videos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Add Videos</a>
-                  </li>
-                  
-                </ul>
-              </div>
+            <div class="card">
+              <!-- /.card-header -->
               <div class="card-body">
-                <div class="tab-content" id="custom-tabs-three-tabContent">
-                  <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                  <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                            <th>VideoId</th>
-                                <th>Name</th>
-                                <th> Path</th>
-                                <th>Image </th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            
-                            <?php 
 
-                            $sql = "select * from tblvideos";
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Create Meeting
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Meeting</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">  
+      <form action="../controller/meetingController.php" method="post">
+              <input type="number" class="form-control" readonly name="meetingID" value="<?php echo $next;  ?>">
+             
+                <div class="row">   
+                    <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Meeting Topic:</label>
+                              <input type="text" name="meetingTopic" class="form-control">
+                            </div>
+                      </div>
+                  </div>
+                  
+                  <div class="row">
+                  <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Meeting Date:</label>
+                              <input type="Date" name="meetingDate" class="form-control">
+                            </div>
+                      </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Meeting Duration:</label>
+                              <select name='meetingDuration' class='form-select form-control' aria-label='Default select example'>
+                                     <option value="10">10</option>
+                                     <option value="15">15</option>
+                                     <option value="20">20</option>
+                                     <option value="25">25</option>
+                                     <option value="30">30</option>
+                            </select>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="row">   
+                    <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Meeting Password:</label>
+                              <input type="text" name="meetingPassword" class="form-control">
+                            </div>
+                      </div>
+                  </div>
+                  
+                
+                  <div class="row">   
+                    <div class="col-md-12">
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Meeting Category:</label>
+                            <?php 
+                            $sql = "select * from tblcategory";
                             $result = mysqli_query($con, $sql);
                             if (mysqli_num_rows($result) > 0) {
-                                // output data of each row
-                                while($row = mysqli_fetch_assoc($result)) {
-
-                                if($row['isActive'] == true)
-                                {
-                                    $isActive = "<button type='button' class='btn btn-success'>Active</button>";
-                                }
-                                else{
-                                    $isActive = "<button type='button' class='btn btn-danger'>InActive</button>";
-                                }
-                                echo " <tr>
-                                <td>".$row['vid']."</td>
-                                <td>".$row['videoName']."</td>
-                                <td>".$row['videoPath']."</td>
-                                <td><img src=../controller/uploads/".$row['videoImage']." width=100px></td>
-                                <td><a class='btn btn-danger' href=../controller/categoryController.php?catID=".$row['vid']."> Delete </a></td>
-                                </tr>";
-                                }
-                            } else {
-                                echo "0 results";
+                            // output data of each row
+                            echo "<select name='meetingCategoryID' class='form-select form-control' aria-label='Default select example'> ";
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo " <option value=".$row['catid'].">".$row['categoryName']."</option>";
                             }
-                            ?>     
-                        </tbody>
-                        <tfoot>
-                        
-                                <th>VideoId</th>
-                                <th>Name</th>
-                                <th> Path</th>
-                                <th>Image </th>
-                                <th>Delete</th>
-                        </tfoot>
-                        </table>
+                            } else {
+                            echo "0 results";
+                            }
+                            ?>    
+                                </select>
+                            </div>
+                      </div>
                   </div>
-                  <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                    
-                    <form action="../controller/cateVidController.php" method="post" enctype="multipart/form-data">
-                      <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Video Name</label>
-                        <input type="text" name="videoName" class="form-control" id="exampleFormControlInput1" required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Video Path</label>
-                        <input type="text" name="videoPath" class="form-control" id="exampleFormControlInput1" required>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Video Category</label>
-                            <?php 
-                                $sql = "select * from tblcategory";
-                                $result = mysqli_query($con, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    // output data of each row
-                                    echo "<select name='videoCategoryId' id='videoCategoryId' class='form-select form-control' aria-label='Default select example'>
-                                            <option >Select the Category </option>";
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<option value=".$row['catid'].">".$row['categoryName']."</option>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                            ?>     
-                            </select>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Video Thumbnail</label>
-                        <input type="file" class="form-control"   name="image" required id="exampleInputPassword1" >
-                     </div>
-                     <input  type="submit" name="videoAdd" class="btn btn-primary mt-3" value="Add New Video">
-                    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <input type="submit" name="addMeet" class="btn btn-success" value="Add New">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-                  </div>
-                 
-                </div>
+
+
               </div>
-           
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
 
 
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
 
 
+            
+              <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Meeting ID</th>
+                    <th>Topic</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Password</th>
+                    <th>Cancel </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                 <?php 
+
+                  $sql = "select * from tblmeetings";
+                  $result = mysqli_query($con, $sql);
+                  if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result)) {
+
+                     
+                      echo " <tr>
+                      <td>".$row['meetingID']."</td>
+                      <td>".$row['meetingTopic']."</td>
+                      <td>".$row['meetingDate']."</td>
+                      <td>".$row['meetingDuration']."</td>
+                      <td>".$row['meetingPassword']."</td>
+                      <td><a class='btn btn-danger' href=../controller/meetingController.php?meetingID=".$row['meetingID']."> Cancel </a></td>
+                    </tr>";
+                    }
+                  } else {
+                    echo "0 results";
+                  }
+                  ?>     
+                  </tbody>
+                  <tfoot>
+                  
+                  <th>Meeting ID</th>
+                    <th>Topic</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Password</th>
+                    <th>Cancel </th>
+                  </tfoot>
+                </table>
 
 
-
-
-
-
-
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
               
           </div>
           <!-- /.col -->
@@ -469,8 +503,6 @@
 <script src="../public/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-    $("#ans").hide();
-
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -487,45 +519,5 @@
     });
   });
 </script>
-
-<script>
-    $("document").ready( function () {
-      $('#cat').change(function(){  
-           var catID = $(this).val(); 
-          //alert(catID); 
-           $.ajax({  
-                url:"../controller/cateQueController.php",  
-                method:"POST",  
-                data:{catID:catID},  
-                success:function(data){  
-                     $('#mcq').html(data);
-                     $("#ans").show();   
-                }  
-           }); 
-      }); 
-    }); 
-</script>  
-
-
-<script>
-    $("document").ready( function () {
-      $('#ans').change(function(){  
-           var catID = $(this).val(); 
-          alert(catID); 
-          //  $.ajax({  
-          //       url:"../controller/cateQueController.php",  
-          //       method:"POST",  
-          //       data:{catID:catID},  
-          //       success:function(data){  
-          //            $('#mcq').html(data);
-          //            $("#ans").show();   
-          //       }  
-          //  }); 
-      }); 
-    }); 
-</script>  
-
-
-
 </body>
 </html>

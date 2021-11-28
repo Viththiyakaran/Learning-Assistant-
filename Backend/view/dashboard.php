@@ -9,8 +9,10 @@ include('../controller/countController.php');
 include('../controller/regController.php');
 $ua=getBrowser();
 $IP = get_client_ip();
-$sqlLog = "INSERT INTO `tblloginlog`( `userName`, `userType`, `loginDateAndTime`, `logIPAddress`, `logBrowserName`, `logBrowserVersion`, `logOS`, `logBrowserAgent`) 
-VALUES ('".$_SESSION["username"]."','".$_SESSION["type"]."',now(), '".$IP ."','". $ua['name']."','". $ua['version']."','". $ua['platform']."','". $ua['userAgent']."')";
+$sqlLog = "INSERT INTO `tblloginlog`( `userName`, `userType`, `loginDateAndTime`, `logIPAddress`,
+ `logBrowserName`, `logBrowserVersion`, `logOS`, `logBrowserAgent`) 
+VALUES ('".$_SESSION["username"]."','".$_SESSION["type"]."',now(), '".$IP ."',
+'". $ua['name']."','". $ua['version']."','". $ua['platform']."','". $ua['userAgent']."')";
 mysqli_query($con,$sqlLog);
 
  ?>
@@ -167,6 +169,12 @@ mysqli_query($con,$sqlLog);
                <a href="noteAdd.php" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Notes</p>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="meetings.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Meetings</p>   
                </a>
              </li>
              </ul>
