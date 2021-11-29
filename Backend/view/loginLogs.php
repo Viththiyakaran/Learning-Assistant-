@@ -268,12 +268,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Students</h1>
+            <h1 class="m-0">Login Logs</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Students v1</li>
+              <li class="breadcrumb-item active">Login Logs v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -291,10 +291,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Student ID </th>
-                    <th>FullName</th>
-                    <th>Email</th>
+                    <th>Log ID  </th>
                     <th>Username</th>
+                    <th>UserType</th>
+                    <th>LoginDate</th>
                     <th>Join Date</th>
                     <th>Status</th>
                     <th>View</th>
@@ -304,7 +304,7 @@
                   
                  <?php 
 
-                  $sql = "select * from tbllogin where type = 'user'";
+                  $sql = "select * from tblloginlogs where type = 'user'";
                   $result = mysqli_query($con, $sql);
                   if (mysqli_num_rows($result) > 0) {
                     // output data of each row

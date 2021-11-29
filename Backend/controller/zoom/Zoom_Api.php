@@ -12,8 +12,8 @@ use \Firebase\JWT\JWT;
 
 class Zoom_Api
 {
-	private $zoom_api_key = 'tKHT_-PITX-KpE7h3WBPJw';
-	private $zoom_api_secret = '3j2NRCf2dVUEUnANQW4thVr9P01Q2QTD43it';	
+	private $zoom_api_key = '3lYLFoeXTqG5ZywMjjDTXg';
+	private $zoom_api_secret = 'IHE5jIRgerP73t1d7RdrGdYsP3RrNkzbNmek';	
 	
 	//function to generate JWT
 	private function generateJWTKey() {
@@ -67,7 +67,7 @@ class Zoom_Api
     	protected function sendRequest($data)
     	{
 		//Enter_Your_Email
-		$request_url = "https://api.zoom.us/v2/users/thalarajeek@gmail.com/meetings";
+		$request_url = "https://api.zoom.us/v2/users/battikaran6@gmail.com/meetings";
 		
 		$headers = array(
 			"authorization: Bearer ".$this->generateJWTKey(),

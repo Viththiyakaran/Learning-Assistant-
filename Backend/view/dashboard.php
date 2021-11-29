@@ -215,6 +215,29 @@ mysqli_query($con,$sqlLog);
              </ul>
            </li>
            <li class="nav-item">
+             <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-tree"></i>
+               <p>
+                 Analysis 
+                 <i class="fas fa-angle-left right"></i>
+               </p>
+             </a>
+             <ul class="nav nav-treeview">
+               <li class="nav-item">
+                 <a href="loginLogs.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Logins Log</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="pages/UI/icons.html" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Activites Log</p>
+                 </a>
+               </li>
+             </ul>
+           </li>
+           <li class="nav-item">
              <a href="certifications.php" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
                <p>
