@@ -136,7 +136,7 @@
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="addQuestions.php" class="nav-link ">
+                 <a href="addQuestions.php" class="nav-link active">
                    <i class="far fa-circle nav-icon"></i>
                    <p>MCQ Questions</p>
                  </a>
@@ -147,12 +147,6 @@
                    <p>Video Tutorials</p>
                  </a>
                </li>
-               <li class="nav-item">
-               <a href="meetings.php" class="nav-link active">
-                 <i class="far fa-circle nav-icon"></i>
-                 <p>Meetings</p>   
-               </a>
-             </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -258,6 +252,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="meet.php" class="nav-link active">
+            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <p>
+           Meet
+            </p>   
+          </a>
+        </li>
          <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="../controller/sessionController.php?q=logout" class="nav-link">
@@ -302,101 +304,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body">
-
-              <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Create Meeting
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create New Meeting</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">  
-      <form action="../controller/meetingController.php" method="post">
-              <input type="number" class="form-control" readonly name="meetingID" value="<?php echo $next;  ?>">
-             
-                <div class="row">   
-                    <div class="col-md-12">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Meeting Topic:</label>
-                              <input type="text" name="meetingTopic" class="form-control">
-                            </div>
-                      </div>
-                  </div>
-                  
-                  <div class="row">
-                  <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Meeting Date:</label>
-                              <input type="Date" name="meetingDate" class="form-control">
-                            </div>
-                      </div>
-                    <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Meeting Duration:</label>
-                              <select name='meetingDuration' class='form-select form-control' aria-label='Default select example'>
-                                     <option value="10">10</option>
-                                     <option value="15">15</option>
-                                     <option value="20">20</option>
-                                     <option value="25">25</option>
-                                     <option value="30">30</option>
-                            </select>
-                            </div>
-                      </div>
-                  </div>
-                  <div class="row">   
-                    <div class="col-md-12">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Meeting Password:</label>
-                              <input type="text" name="meetingPassword" class="form-control">
-                            </div>
-                      </div>
-                  </div>
-                  
-                
-                  <div class="row">   
-                    <div class="col-md-12">
-                            <div class="form-group">
-                            <label for="exampleInputEmail1">Meeting Category:</label>
-                            <?php 
-                            $sql = "select * from tblcategory";
-                            $result = mysqli_query($con, $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                            // output data of each row
-                            echo "<select name='meetingCategoryID' class='form-select form-control' aria-label='Default select example'> ";
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo " <option value=".$row['catid'].">".$row['categoryName']."</option>";
-                            }
-                            } else {
-                            echo "0 results";
-                            }
-                            ?>    
-                                </select>
-                            </div>
-                      </div>
-                  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="submit" name="addMeet" class="btn btn-success" value="Add New">
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-              </div>
-              <!-- /.card-body -->
+           
             </div>
             <!-- /.card -->
 
@@ -405,55 +313,114 @@
               <!-- /.card-header -->
               <div class="card-body">
 
+              <div class="card-body">
+                        <div class="row">
+              <?php 
+                    include_once '../controller/zoom/Zoom_Api.php';
 
-            
-              <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Meeting ID</th>
-                    <th>Topic</th>
-                    <th>Date</th>
-                    <th>Duration</th>
-                    <th>Password</th>
-                    <th>Cancel </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  
-                 <?php 
+                    $zoom_meeting = new Zoom_Api();
 
-                  $sql = "select * from tblmeetings";
-                  $result = mysqli_query($con, $sql);
-                  if (mysqli_num_rows($result) > 0) {
-                    // output data of each row
-                    while($row = mysqli_fetch_assoc($result)) {
+                    $sql = "select * from tblmeetings";
+                    $result = mysqli_query($con, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        // output data of each row
+                        while($row = mysqli_fetch_assoc($result)) {
+                        $meetingID = $row['meetingID'];
+                        $meetingTopic = $row['meetingTopic'];
+                        $meetingDate = $row['meetingDate'];
+                        $meetingDuration = $row['meetingDuration'];
+                        $meetingPassword = $row['meetingPassword'];
 
-                     
-                      echo " <tr>
-                      <td>".$row['meetingID']."</td>
-                      <td>".$row['meetingTopic']."</td>
-                      <td>".$row['meetingDate']."</td>
-                      <td>".$row['meetingDuration']."</td>
-                      <td>".$row['meetingPassword']."</td>
-                      <td><a class='btn btn-danger' href=../controller/meetingController.php?meetingID=".$row['meetingID']."> Cancel </a></td>
-                    </tr>";
+                        $data = array();
+                        $data['topic'] 		= $meetingTopic;
+                        $data['start_date'] =date("Y-m-d h:i:s", strtotime($meetingDate));
+                        $data['duration'] 	= $meetingDuration;
+                        $data['type'] 		= 2;
+                        $data['password'] 	= $meetingPassword;
+
+                    try {
+                        $response = $zoom_meeting->createMeeting($data);
+                        
+                        //echo "<pre>";
+                        //print_r($response);
+                        //echo "<pre>";
+                        
+                        // echo "<br>Meeting ID: ". $response->id;
+                        // echo "<br>";
+                        // echo "Topic: "	. $response->topic;
+                        // echo "<br>";
+                        // echo "Join URL: ". $response->join_url ."<a href='". $response->join_url ."'>Open URL</a>";
+                        // echo "<br>";
+                        // echo "Meeting Password: ". $response->password;
+                        
+                        echo '
+                          <div class="col-sm-4">
+                            <div class="position-relative p-3 bg-gray" style="height: 180px">
+                              <div class="ribbon-wrapper">
+                                <div class="ribbon bg-primary">
+                                  Ribbon
+                                </div>
+                              </div>
+                              Meeting ID : '. $response->id.'<br />
+                              <small> Meeting Topic : '. $response->topic.'<br />
+                                    Meeting Password : '. $response->password.'<br />
+                                    Meeting Date    :  '. $meetingDate.'<br />
+                                    Meeting Open    :  <a href='. $response->join_url.'>Open</a><br />
+                              </small>
+                            </div>
+                          </div>
+                        ';
+                        
+                    } catch (Exception $ex) {
+                        echo $ex;
                     }
-                  } else {
-                    echo "0 results";
-                  }
-                  ?>     
-                  </tbody>
-                  <tfoot>
-                  
-                  <th>Meeting ID</th>
-                    <th>Topic</th>
-                    <th>Date</th>
-                    <th>Duration</th>
-                    <th>Password</th>
-                    <th>Cancel </th>
-                  </tfoot>
-                </table>
 
+
+                        }
+                    } else {
+                        echo "0 results";
+                    } 
+
+
+
+
+
+
+
+                    // $data = array();
+                    // $data['topic'] 		= 'Example Test Meeting';
+                    // $data['start_date'] = date("Y-m-d h:i:s", strtotime('tomorrow'));
+                    // $data['duration'] 	= 30;
+                    // $data['type'] 		= 2;
+                    // $data['password'] 	= "12345";
+
+                    // try {
+                    //     $response = $zoom_meeting->createMeeting($data);
+                        
+                    //     //echo "<pre>";
+                    //     //print_r($response);
+                    //     //echo "<pre>";
+                        
+                    //     echo "Meeting ID: ". $response->id;
+                    //     echo "<br>";
+                    //     echo "Topic: "	. $response->topic;
+                    //     echo "<br>";
+                    //     echo "Join URL: ". $response->join_url ."<a href='". $response->join_url ."'>Open URL</a>";
+                    //     echo "<br>";
+                    //     echo "Meeting Password: ". $response->password;
+                        
+                        
+                    // } catch (Exception $ex) {
+                    //     echo $ex;
+                    // }
+
+                  
+
+                ?>
+            
+            
+                         </div>
+                      </div>
 
               </div>
               <!-- /.card-body -->

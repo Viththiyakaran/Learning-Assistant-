@@ -31,4 +31,19 @@ $next = $row + 1 ;
         echo '<script>alert("Meeting has been not created ! Try again") </script>' ;
     }
   }
+
+  //===========================================================================================//
+
+  if(isset($_GET['meetingID'])){
+    $sql = "DELETE FROM `tblmeetings` WHERE `meetingID`='".$_GET['meetingID']."'";
+
+    if(mysqli_query($con,$sql))
+    {
+        echo '<script>alert("Meeting been Deleted") </script>' ;
+        header("location:../view/meetings.php");  
+    }
+    else{
+        echo '<script>alert("Meeting has been not deleted ! Try again") </script>' ;
+    }
+  }
 ?>

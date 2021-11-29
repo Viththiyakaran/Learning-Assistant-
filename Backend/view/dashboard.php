@@ -201,9 +201,9 @@ mysqli_query($con,$sqlLog);
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
+                 <a href="meet.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
+                   <p>Meet</p>
                  </a>
                </li>
                <li class="nav-item">
@@ -279,6 +279,14 @@ mysqli_query($con,$sqlLog);
             <p>
             Read Notes  
             </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="meet.php" class="nav-link">
+            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <p>
+           Meet
+            </p>   
           </a>
         </li>
          <li class="nav-header">ADVANCED</li>
