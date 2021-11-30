@@ -111,7 +111,7 @@
              </a>
            </li>
            <li class="nav-item">
-             <a href="students.php" class="nav-link ">
+             <a href="students.php" class="nav-link">
                <i class="nav-icon fas fa-th"></i>
                <p>
                 Students
@@ -119,7 +119,7 @@
                </p>
              </a>
            </li>
-           <li class="nav-item menu-open">
+           <li class="nav-item">
              <a href="#" class="nav-link">
                <i class="nav-icon fas fa-copy"></i>
                <p>
@@ -130,13 +130,13 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="addSubjectCat.php" class="nav-link ">
+                 <a href="addSubjectCat.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Categories</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="addQuestions.php" class="nav-link ">
+                 <a href="addQuestions.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>MCQ Questions</p>
                  </a>
@@ -147,6 +147,18 @@
                    <p>Video Tutorials</p>
                  </a>
                </li>
+               <li class="nav-item">
+               <a href="noteAdd.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Notes</p>
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="meetings.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Meetings</p>   
+               </a>
+             </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -159,7 +171,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="mcqadd.php" class="nav-link">
+                 <a href="mcqAdd.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>Multiple-choice question</p>
                  </a>
@@ -171,9 +183,15 @@
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
+                 <a href="meet.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
+                   <p>Meet</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="readNote.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Read Notes</p>
                  </a>
                </li>
              </ul>
@@ -188,35 +206,36 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="pages/UI/general.html" class="nav-link">
+                 <a href="loginLogs.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Logins</p>
+                   <p>Logins Log</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/UI/icons.html" class="nav-link">
+                 <a href="activeLogs.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Marks</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/UI/buttons.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Subjects</p>
+                   <p>Activites Log</p>
                  </a>
                </li>
              </ul>
            </li>
            <li class="nav-item">
-             <a href="#" class="nav-link">
+             <a href="certifications.php" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
                <p>
                 Certifications
                </p>
              </a>
            </li>
-           <li class="nav-header">EXAMPLES</li>
-          
+           <li class="nav-header">ADVANCED</li>
+           <li class="nav-item">
+           <a href="institutionSetup.php" class="nav-link">
+             <i class="nav-icon fas fa-university"></i>
+             <p>
+              Institution
+             </p>    
+           </a>
+           </li>
            <li class="nav-item">
              <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -227,10 +246,17 @@
            </li>';
            }
            else{
-            echo '
+            echo '<li class="nav-item">
+            <a href="dashboard.php" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
             <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-users-cog"></i>
               <p>
                Profile
               </p>
@@ -238,7 +264,7 @@
           </li>
           <li class="nav-item">
             <a href="mcqAdd.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon far fa-question-circle"></i>
               <p>
                MCQ Game
               </p>
@@ -246,13 +272,29 @@
           </li>
           <li class="nav-item">
           <a href="videoGame.php" class="nav-link">
-            <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon fas fa-video"></i>
             <p>
              Video Tutorils
             </p>
           </a>
         </li>
-         <li class="nav-header">EXAMPLES</li>
+        <li class="nav-item">
+          <a href="readNote.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>
+            Read Notes  
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="meet.php" class="nav-link">
+            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <p>
+           Meet
+            </p>   
+          </a>
+        </li>
+         <li class="nav-header">ADVANCED</li>
           <li class="nav-item">
             <a href="../controller/sessionController.php?q=logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

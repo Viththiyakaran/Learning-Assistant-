@@ -145,7 +145,7 @@ if (mysqli_num_rows($result) > 0) {
                with font-awesome or any other icon font library -->
 
 
-           <?php  
+               <?php  
            if($_SESSION['type'] == "Admin") 
            {
              echo '<li class="nav-item">
@@ -199,6 +199,12 @@ if (mysqli_num_rows($result) > 0) {
                  <p>Notes</p>
                </a>
              </li>
+             <li class="nav-item">
+               <a href="meetings.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Meetings</p>   
+               </a>
+             </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -223,21 +229,44 @@ if (mysqli_num_rows($result) > 0) {
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
+                 <a href="meet.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
+                   <p>Meet</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
+                 <a href="readNote.php" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
+                   <p>Read Notes</p>
                  </a>
                </li>
              </ul>
            </li>
            <li class="nav-item">
              <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-tree"></i>
+               <p>
+                 Analysis 
+                 <i class="fas fa-angle-left right"></i>
+               </p>
+             </a>
+             <ul class="nav nav-treeview">
+               <li class="nav-item">
+                 <a href="loginLogs.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Logins Log</p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="activeLogs.php" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Activites Log</p>
+                 </a>
+               </li>
+             </ul>
+           </li>
+           <li class="nav-item">
+             <a href="certifications.php" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
                <p>
                 Certifications
@@ -245,7 +274,14 @@ if (mysqli_num_rows($result) > 0) {
              </a>
            </li>
            <li class="nav-header">ADVANCED</li>
-          
+           <li class="nav-item">
+           <a href="institutionSetup.php" class="nav-link">
+             <i class="nav-icon fas fa-university"></i>
+             <p>
+              Institution
+             </p>    
+           </a>
+           </li>
            <li class="nav-item">
              <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -294,6 +330,14 @@ if (mysqli_num_rows($result) > 0) {
             <p>
             Read Notes  
             </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="meet.php" class="nav-link">
+            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <p>
+           Meet
+            </p>   
           </a>
         </li>
          <li class="nav-header">ADVANCED</li>

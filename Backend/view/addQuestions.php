@@ -158,24 +158,30 @@
                </p>
              </a>
              <ul class="nav nav-treeview">
-               <li class="nav-item">
-                 <a href="mcqadd.php" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Multiple-choice question</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="videoGame.php" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Video Tutorials</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/charts/inline.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>One to one</p>
-                 </a>
-               </li>
+             <li class="nav-item">
+             <a href="mcqAdd.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Multiple-choice question</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="videoGame.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Video Tutorials</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="meet.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Meet</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="readNote.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Read Notes</p>
+             </a>
+           </li>
              </ul>
            </li>
            <li class="nav-item">
@@ -187,38 +193,40 @@
                </p>
              </a>
              <ul class="nav nav-treeview">
-               <li class="nav-item">
-                 <a href="pages/UI/general.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Logins</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/UI/icons.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Marks</p>
-                 </a>
-               </li>
-               <li class="nav-item">
-                 <a href="pages/UI/buttons.html" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Subjects</p>
-                 </a>
-               </li>
+             <li class="nav-item">
+             <a href="loginLogs.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Logins Log</p>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a href="activeLogs.php" class="nav-link">
+               <i class="far fa-circle nav-icon"></i>
+               <p>Activites Log</p>
+             </a>
+           </li>
+               
              </ul>
            </li>
            <li class="nav-item">
-             <a href="#" class="nav-link">
+             <a href="certifications.php" class="nav-link">
                <i class="nav-icon fas fa-edit"></i>
                <p>
                 Certifications
                </p>
              </a>
            </li>
-           <li class="nav-header">EXAMPLES</li>
-          
+           <li class="nav-header">ADVANCED</li>
            <li class="nav-item">
-             <a href="../controller/sessionDistoryController.php?q=logout" class="nav-link">
+           <a href="institutionSetup.php" class="nav-link">
+             <i class="nav-icon fas fa-university"></i>
+             <p>
+              Institution
+             </p>    
+           </a>
+           </li>
+           <li class="nav-item">
+             <a href="../controller/sessionController.php?q=logout" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
                <p>
                 Logout
