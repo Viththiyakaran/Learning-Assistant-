@@ -268,12 +268,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Login Logs</h1>
+            <h1 class="m-0">Activities Logs</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Login Logs v1</li>
+              <li class="breadcrumb-item active">Activities Logs v1</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -291,19 +291,19 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Log ID  </th>
-                    <th>Username</th>
-                    <th>LoginDate</th>
-                    <th>logIPAddress</th>
+                    <th>Activity ID </th>
+                    <th>Activity </th>
+                    <th>UserName</th>
+                    <th>Date and Time</th>
                     <th>logBrowserName</th>
-                    <th>logOS</th>
+                   
                   </tr>
                   </thead>
                   <tbody>
                   
                  <?php 
 
-                  $sql = "select * from tblloginlog where userType = 'user' order by logID desc";
+                  $sql = "select * from tbluseractivitylog order by actid desc";
                   $result = mysqli_query($con, $sql);
                   if (mysqli_num_rows($result) > 0) {
                     // output data of each row
@@ -311,12 +311,12 @@
 
                       
                       echo " <tr>
-                      <td>".$row['logID']."</td>
-                      <td>".$row['userName']."</td>
-                      <td>".$row['loginDateAndTime']."</td>
-                      <td>".$row['logIPAddress']."</td>
-                      <td>".$row['logBrowserName']."</td>
-                      <td>".$row['logOS']."</td>
+                      <td>".$row['actid']."</td>
+                      <td>".$row['activity']."</td>
+                      <td>".$row['actUserName']."</td>
+                      <td>".$row['actDataAndTime']."</td>
+                      <td>".$row['actBrowserName']."</td>
+                     
                     
                     </tr>";
                     }
@@ -326,12 +326,11 @@
                   ?>     
                   </tbody>
                   <tfoot>
-                   <th>Log ID  </th>
-                    <th>Username</th>
-                    <th>LoginDate</th>
-                    <th>logIPAddress</th>
+                  <th>Activity ID </th>
+                    <th>Activity </th>
+                    <th>UserName</th>
+                    <th>Date and Time</th>
                     <th>logBrowserName</th>
-                    <th>logOS</th>
                   </tfoot>
                 </table>
               </div>
